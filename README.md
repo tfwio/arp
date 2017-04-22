@@ -23,7 +23,13 @@ its a fairly simple arpeggiator called 'arpeggio' for the moment.
 accompanied by the horrible readme...
 
 To tell you the honest truth, I don't know how much time I'm going to be spending on updating this.  It just kind of popped into existance over the past couple weeks and fleshed into what you see—guess we'll see what this turns into.
-Mostly, I just wanted to elaborte some midi-controller enhancements for playing with my midi-piano in ardour as well as perhaps sandbox some MIDI timing/triggering stuff.  Also there are no binaries at the moment until I get a few more ramp types and possibly re-work the UI a bit (am in no rush).  I'd say that this is a pretty decent IPLUG/WDL-OL MIDI example, but there are a few IPLUG hacks and also its not quite cross-platform at the moment.
+Mostly, I just wanted to elaborte some midi-controller enhancements for playing with my midi-piano in ardour as well as perhaps sandbox some MIDI timing/triggering stuff.  I'd say that this is a pretty decent IPLUG/WDL-OL MIDI example, but there are a few IPLUG hacks and also its not quite cross-platform at the moment.
+
+----
+
+You can download (pre-release) binaries for x86 and x64 windows on the [releases](https://github.com/tfwio/arp/releases) page.
+
+----
 
 ![](resources/img/20170421_2251cst.png)
 
