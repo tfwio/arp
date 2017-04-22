@@ -53,11 +53,16 @@ You can download (pre-release) binaries for x86 and x64 windows on the [releases
 
 ## NOTES and EXPLANATIONS
 
-**PITCH CONTROL** — Ignores notes calculated out of range of [0-127].  This is one of the last intended features that I added and once I played with it, I was a bit let down to see that I'm now going to have to clean up and predict when notes are going to bump into each other.  For tinkering around, this feature is fine but if you are looking to generate clean MIDI when tinkering around with this guy, you will find erronious MIDI data needing cleaning.
+**PITCH CONTROL** — Ignores notes calculated out of range of [0-127].  This is one of the last intended features that I added and once I played with it, I was a bit let down to see that I'm now going to have to clean up and predict when notes are going to bump into each other.  For tinkering around, this feature is fine but if you are looking to generate clean MIDI when tinkering around with this guy, you will find erronious MIDI data needing cleaning.  
+Like the GATE knob/feature, this is one of the last things added could use some work on predicting note-on/off-overlaps.
 
 **UI KEYBOARD** &mdash; Is a little buggy when it comes to turning off the last note depressed since I had spent the least amount of time working a few changes into Tale's MIDI-Keyboard `IControl`.  You're better off just right-clicking to wipe clean all the notes and use the MIDDLE-CLICK-BUTTON to set whatever it is that you're trying to depress.
 
 The Keyboard acts as your MIDI keyboard until you click with the MIDDLE_BUTTON (Mouse Wheel Button) to get a key (or many) to "stick", and use the RIGHT_CLICK to clear the keys depressed as such.
+
+**GATE** &mdash; this is a percentage value ranging from 1 to 200, generally for shrinking down the length of a generated note.  
+This is another one of those things that you're going to want to be careful with considering you might generate a NOTE_ON/NOTE_OFF combonation that will interfere with the next coming message that may be the same note, in which case you're going to just about immediately turn of the new NOTE_ON message or otherwise generate MIDI that isn't wise.  
+Like the KEY_PITCH knob/feature, this is one of the last things added could use some work on predicting note-on/off-overlaps.
 
 ----
 
