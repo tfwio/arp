@@ -1,0 +1,11 @@
+*.tlog
+*.log
+*.user
+build-win
+*.sdf
+*.lnk
+*.suo
+**/*.sublime-workspace
+**/c_cpp_properties.json
+**/settings.json
+**/tasks.json
