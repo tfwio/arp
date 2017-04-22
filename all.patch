@@ -1,0 +1,204 @@
+ library/wdl-ol/WDL/IPlug/IControl.h          | 30 ++++++++++++++++++++++++++--
+ library/wdl-ol/WDL/IPlug/IGraphicsWin.cpp    | 10 +++++++++-
+ library/wdl-ol/WDL/IPlug/IPlugBase.h         |  4 +++-
+ library/wdl-ol/WDL/IPlug/IPlugStandalone.cpp |  3 +++
+ library/wdl-ol/WDL/IPlug/IPlugStandalone.h   | 23 ++++++++++++++++++---
+ library/wdl-ol/WDL/IPlug/IPlugStructs.h      | 10 +++++-----
+ 6 files changed, 68 insertions(+), 12 deletions(-)
+
+diff --git a/library/wdl-ol/WDL/IPlug/IControl.h b/library/wdl-ol/WDL/IPlug/IControl.h
+index 1377ef6..f9379c5 100644
+--- a/library/wdl-ol/WDL/IPlug/IControl.h
++++ b/library/wdl-ol/WDL/IPlug/IControl.h
+@@ -12,6 +12,12 @@
+ // transforming a bitmap, or cycling through a set of bitmaps.
+ // Other controls are readouts only.
+ 
++
++#define IRRECT(x,y,w,h) IRECT(x, y, x + w, y + h)
++#define BMP_FRAMES_H(pGFX,pBMP,rID,rFN,iFRAMES) pBMP = pGFX->LoadIBitmap(rID,rFN,iFRAMES,true)
++#define BMP_FRAMES_V(pGFX,pBMP,rID,rFN,iFRAMES) pBMP = pGFX->LoadIBitmap(rID,rFN,iFRAMES,false)
++#define ctl_rect(name,x,y,w,h) name.SetRect(x,y,w,h)
++#define ctl_xy(name,x,y,r2) name.SetRect(x,y,r2.W(),r2.H())
+ #define DEFAULT_TEXT_ENTRY_LEN 7
+ 
+ class IControl
+@@ -158,11 +164,11 @@ class IBitmapControl : public IControl
+ {
+ public:
+   IBitmapControl(IPlugBase* pPlug, int x, int y, int paramIdx, IBitmap* pBitmap,
+-                 IChannelBlend::EBlendMethod blendMethod = IChannelBlend::kBlendNone)
++    IChannelBlend::EBlendMethod blendMethod = IChannelBlend::kBlendNone)
+     : IControl(pPlug, IRECT(x, y, pBitmap), paramIdx, blendMethod), mBitmap(*pBitmap) {}
+ 
+   IBitmapControl(IPlugBase* pPlug, int x, int y, IBitmap* pBitmap,
+-                 IChannelBlend::EBlendMethod blendMethod = IChannelBlend::kBlendNone)
++    IChannelBlend::EBlendMethod blendMethod = IChannelBlend::kBlendNone)
+     : IControl(pPlug, IRECT(x, y, pBitmap), -1, blendMethod), mBitmap(*pBitmap) {}
+ 
+   virtual ~IBitmapControl() {}
+@@ -173,6 +179,26 @@ protected:
+   IBitmap mBitmap;
+ };
+ 
++// Draws a bitmap, or one frame of a stacked bitmap depending on the current value.
++class ITaggedBitmapControl : public IBitmapControl
++{
++public:
++  ITaggedBitmapControl(IPlugBase* pPlug, int x, int y, int paramIdx, IBitmap* pBitmap,
++    double tag, IChannelBlend::EBlendMethod blendMethod = IChannelBlend::kBlendNone)
++    : IBitmapControl(pPlug, x, y, paramIdx, pBitmap, blendMethod), mTag(tag) {}
++
++  ITaggedBitmapControl(IPlugBase* pPlug, int x, int y, IBitmap* pBitmap,
++    double tag, IChannelBlend::EBlendMethod blendMethod = IChannelBlend::kBlendNone)
++    : IBitmapControl(pPlug, x, y, pBitmap, blendMethod), mTag(tag) {}
++  
++  double getTag() { return mTag; }
++  void setTag(double tagValue) { mTag = tagValue; }
++
++protected:
++  IBitmap mBitmap;
++  double mTag;
++};
++
+ // A switch.  Click to cycle through the bitmap states.
+ class ISwitchControl : public IBitmapControl
+ {
+diff --git a/library/wdl-ol/WDL/IPlug/IGraphicsWin.cpp b/library/wdl-ol/WDL/IPlug/IGraphicsWin.cpp
+index 11f508f..52ccdd5 100644
+--- a/library/wdl-ol/WDL/IPlug/IGraphicsWin.cpp
++++ b/library/wdl-ol/WDL/IPlug/IGraphicsWin.cpp
+@@ -60,7 +60,14 @@ LRESULT CALLBACK IGraphicsWin::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARA
+     return 0;
+   }
+ 
+-  IGraphicsWin* pGraphics = (IGraphicsWin*) GetWindowLongPtr(hWnd, GWLP_USERDATA);
++  IGraphicsWin* pGraphics = (IGraphicsWin*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
++
++  if (msg == WM_TIMER && wParam == IPLUG_TIMER_ID)
++  {
++    pGraphics->mPlug->OnTimer();
++
++  }
++
+   char txt[MAX_PARAM_LEN];
+   double v;
+ 
+@@ -83,6 +90,7 @@ LRESULT CALLBACK IGraphicsWin::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARA
+ 
+     case WM_TIMER:
+     {
++
+       if (wParam == IPLUG_TIMER_ID)
+       {
+ 
+diff --git a/library/wdl-ol/WDL/IPlug/IPlugBase.h b/library/wdl-ol/WDL/IPlug/IPlugBase.h
+index 1791ef8..a7e7f92 100644
+--- a/library/wdl-ol/WDL/IPlug/IPlugBase.h
++++ b/library/wdl-ol/WDL/IPlug/IPlugBase.h
+@@ -12,7 +12,7 @@
+ #include "NChanDelay.h"
+ 
+ // Uncomment to enable IPlug::OnIdle() and IGraphics::OnGUIIdle().
+-// #define USE_IDLE_CALLS
++#define USE_IDLE_CALLS
+ 
+ #define MAX_EFFECT_NAME_LEN 128
+ #define DEFAULT_BLOCK_SIZE 1024
+@@ -65,6 +65,8 @@ public:
+   // Only active if USE_IDLE_CALLS is defined.
+   virtual void OnIdle() {}
+ 
++  virtual void OnTimer(){}
++
+   // Not usually needed ... Reset is called on activate regardless of whether this is implemented.
+   // Also different hosts have different interpretations of "activate".
+   // Implementations should set a mutex lock like in the no-op!
+diff --git a/library/wdl-ol/WDL/IPlug/IPlugStandalone.cpp b/library/wdl-ol/WDL/IPlug/IPlugStandalone.cpp
+index c0c0c89..964cf15 100644
+--- a/library/wdl-ol/WDL/IPlug/IPlugStandalone.cpp
++++ b/library/wdl-ol/WDL/IPlug/IPlugStandalone.cpp
+@@ -32,6 +32,8 @@ IPlugStandalone::IPlugStandalone(IPlugInstanceInfo instanceInfo,
+               plugIsInst,
+               kAPISA)
+   , mMidiOutChan(0)
++  , mFramesCounted(0)
++  , mTempo(DEFAULT_TEMPO)
+ {
+   Trace(TRACELOC, "%s%s", effectName, channelIOStr);
+ 
+@@ -105,4 +107,5 @@ void IPlugStandalone::LockMutexAndProcessDoubleReplacing(double** inputs, double
+ {
+   IMutexLock lock(this);
+   ProcessDoubleReplacing(inputs, outputs, nFrames);
++  mFramesCounted = (mFramesCounted + nFrames) % int(4294967296);
+ }
+diff --git a/library/wdl-ol/WDL/IPlug/IPlugStandalone.h b/library/wdl-ol/WDL/IPlug/IPlugStandalone.h
+index 325096c..6a8f0c9 100644
+--- a/library/wdl-ol/WDL/IPlug/IPlugStandalone.h
++++ b/library/wdl-ol/WDL/IPlug/IPlugStandalone.h
+@@ -50,10 +50,24 @@ public:
+   void EndInformHostOfParamChange(int idx) {};
+   void InformHostOfProgramChange() {};
+ 
+-  int GetSamplePos() { return 0; }   // Samples since start of project.
+-  double GetTempo() { return DEFAULT_TEMPO; }
++  int GetSamplePos() { return mFramesCounted; }   // Samples since start of project.
++  double GetTempo() { return mTempo; }
+   void GetTimeSig(int* pNum, int* pDenom) { return; }
+-  void GetTime(ITimeInfo* pTimeInfo) { return; }
++  void GetTime(ITimeInfo* pTimeInfo) override {
++    //pTimeInfo = (ITimeInfo*)malloc(sizeof(ITimeInfo));
++    //IPlugBase::GetTime(pTimeInfo);
++    pTimeInfo->mCycleEnd = 0;
++    pTimeInfo->mCycleStart = 0;
++    pTimeInfo->mDenominator = 0;
++    pTimeInfo->mLastBar = 0;
++    pTimeInfo->mNumerator = 0;
++    pTimeInfo->mPPQPos = 0;
++    pTimeInfo->mSamplePos = mFramesCounted;
++    pTimeInfo->mTempo = mTempo;
++    pTimeInfo->mTransportIsRunning = true;
++    pTimeInfo->mTransportLoopEnabled = false;
++    return;
++  }
+ 
+   void ResizeGraphics(int w, int h);
+ 
+@@ -66,6 +80,9 @@ protected:
+ private:
+   RtMidiOut* mMidiOut;
+   unsigned short* mMidiOutChan;
++  //unsigned long long int nSamples;
++  int mFramesCounted,
++    mTempo;
+ };
+ 
+ IPlugStandalone* MakePlug(void* pMidiOutput, unsigned short* pMidiOutChan);
+diff --git a/library/wdl-ol/WDL/IPlug/IPlugStructs.h b/library/wdl-ol/WDL/IPlug/IPlugStructs.h
+index 4f98269..8e4c24b 100644
+--- a/library/wdl-ol/WDL/IPlug/IPlugStructs.h
++++ b/library/wdl-ol/WDL/IPlug/IPlugStructs.h
+@@ -243,17 +243,17 @@ struct IRECT
+   inline IRECT SubRectVertical(int numSlices, int sliceIdx)
+   {
+     float heightOfSubRect = (float(H()) / numSlices);
+-    int t = heightOfSubRect * sliceIdx;
+-
+-    return IRECT(L, T + t, R, T + t + heightOfSubRect);
++    int t = int(heightOfSubRect * sliceIdx);
++    // FIXME: TODO: WTF?
++    return IRECT(L, T + t, R, T + t + int(heightOfSubRect));
+   }
+ 
+   inline IRECT SubRectHorizontal(int numSlices, int sliceIdx)
+   {
+     float widthOfSubRect = (float(W()) / numSlices);
+-    int l = widthOfSubRect * sliceIdx;
++    int l = int(widthOfSubRect * sliceIdx);
+ 
+-    return IRECT(L + l, T, L + l + widthOfSubRect, B);
++    return IRECT(L + l, T, L + l + int(widthOfSubRect), B);
+   }
+   
+   inline IRECT GetPadded(int padding)

@@ -1,0 +1,163 @@
+<html>
+<head>
+  <title>Arpeggiator</title>
+  <meta charset="utf-8">
+</head>
+</body>
+<p><header style="text-align: center;">
+<h1 class="title">Arpeggiator</h1>
+<h2 class="subtitle">progress</h2>
+<style>
+
+body {
+  font-family: Roboto Slab !important;
+  
+}
+
+</style>
+<!-- github-like md.css -->
+<link rel="stylesheet" type="text/css" href="data:text/css;base64,LyogMjAxNDA5MDUgR2l0aHViIE1hcmtkb3duIENTUyAqLw0KYm9keQ0Kew0KICBmb250LXNpemU6MTVweDsNCiAgbGluZS1oZWlnaHQ6MS43Ow0KICBvdmVyZmxvdy14OmhpZGRlbjsNCg0KICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlOw0KICAgIGJvcmRlci1yYWRpdXM6IDNweDsNCiAgICBib3JkZXI6IDNweCBzb2xpZCAjRUVFOw0KICAgIGJveC1zaGFkb3c6IGluc2V0IDAgMCAwIDFweCAjQ0VDRUNFOw0KICAgIGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2EsIGFyaWFsLCBmcmVlc2FucywgY2xlYW4sIHNhbnMtc2VyaWY7DQogICAgbWF4LXdpZHRoOiA5MTJweDsNCiAgICBwYWRkaW5nOiAzMHB4Ow0KICAgIG1hcmdpbjogMmVtIGF1dG87DQoNCiAgICBjb2xvcjojMzMzMzMzOw0KfQ0KDQoNCi5ib2R5LWNsYXNzaWN7DQogIGNvbG9yOiM0NDQ7DQogIGZvbnQtZmFtaWx5Okdlb3JnaWEsIFBhbGF0aW5vLCAnUGFsYXRpbm8gTGlub3R5cGUnLCBUaW1lcywgJ1RpbWVzIE5ldyBSb21hbicsICJIaXJhZ2lubyBTYW5zIEdCIiwgIlNUWGloZWkiLCAi5b6u6L2v6ZuF6buRIiwgc2VyaWY7DQogIGZvbnQtc2l6ZToxNnB4Ow0KICBsaW5lLWhlaWdodDoxLjVlbTsNCiAgYmFja2dyb3VuZDojZmVmZWZlOw0KICB3aWR0aDogNDVlbTsNCiAgbWFyZ2luOiAxMHB4IGF1dG87DQogIHBhZGRpbmc6IDFlbTsNCiAgb3V0bGluZTogMTMwMHB4IHNvbGlkICNGQUZBRkE7DQp9DQoNCmJvZHk+OmZpcnN0LWNoaWxkDQp7DQogIG1hcmdpbi10b3A6MCFpbXBvcnRhbnQ7DQp9DQoNCmJvZHk+Omxhc3QtY2hpbGQNCnsNCiAgbWFyZ2luLWJvdHRvbTowIWltcG9ydGFudDsNCn0NCg0KYmxvY2txdW90ZSxkbCxvbCxwLHByZSx0YWJsZSx1bCB7DQogIGJvcmRlcjogMDsNCiAgbWFyZ2luOiAxNXB4IDA7DQogIHBhZGRpbmc6IDA7DQp9DQoNCmJvZHkgYSB7DQogIGNvbG9yOiAjNDE4M2M0Ow0KICB0ZXh0LWRlY29yYXRpb246IG5vbmU7DQp9DQoNCmJvZHkgYTpob3ZlciB7DQogIHRleHQtZGVjb3JhdGlvbjogdW5kZXJsaW5lOw0KfQ0KDQpib2R5IGEuYWJzZW50DQp7DQogIGNvbG9yOiNjMDA7DQp9DQoNCmJvZHkgYS5hbmNob3INCnsNCiAgZGlzcGxheTpibG9jazsNCiAgcGFkZGluZy1sZWZ0OjMwcHg7DQogIG1hcmdpbi1sZWZ0Oi0zMHB4Ow0KICBjdXJzb3I6cG9pbnRlcjsNCiAgcG9zaXRpb246YWJzb2x1dGU7DQogIHRvcDowOw0KICBsZWZ0OjA7DQogIGJvdHRvbTowDQp9DQoNCi8qaDQsaDUsaDZ7IGZvbnQtd2VpZ2h0OiBib2xkOyB9Ki8NCg0KLm9jdGljb257DQogIGZvbnQ6bm9ybWFsIG5vcm1hbCAxNnB4IHNhbnMtc2VyaWY7DQogIHdpZHRoOiAxZW07DQogIGhlaWdodDogMWVtOw0KICBsaW5lLWhlaWdodDoxOw0KICBkaXNwbGF5OmlubGluZS1ibG9jazsNCiAgdGV4dC1kZWNvcmF0aW9uOm5vbmU7DQogIC13ZWJraXQtZm9udC1zbW9vdGhpbmc6YW50aWFsaWFzZWQNCn0NCg0KLm9jdGljb24tbGluayB7DQogIGJhY2tncm91bmQ6IHVybCgiZGF0YTppbWFnZS9zdmcreG1sO3V0ZjgsPD94bWwgdmVyc2lvbj0nMS4wJyBzdGFuZGFsb25lPSdubyc/PiA8IURPQ1RZUEUgc3ZnIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICdodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQnPiA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDEwMjQgODMyJz4gPG1ldGFkYXRhPkNvcHlyaWdodCAoQykgMjAxMyBieSBHaXRIdWI8L21ldGFkYXRhPiA8IS0tIHNjYWxlKDAuMDE1NjU1NTc3Mjk5NDEpIC0tPiA8cGF0aCB0cmFuc2Zvcm09JycgZD0nTTc2OCA2NGgtMTkycy0yNTQgMC0yNTYgMjU2YzAgMjIgMyA0MyA4IDY0aDEzN2MtMTEtMTktMTgtNDEtMTgtNjQgMC0xMjggMTI4LTEyOCAxMjgtMTI4aDE5MnMxMjggMCAxMjggMTI4LTEyOCAxMjgtMTI4IDEyOCAwIDY0LTY0IDEyOGg2NHMyNTYgMCAyNTYtMjU2LTI1Ni0yNTYtMjU2LTI1NnogbS03MiAxOTJoLTEzN2MxMSAxOSAxOCA0MSAxOCA2NCAwIDEyOC0xMjggMTI4LTEyOCAxMjhoLTE5MnMtMTI4IDAtMTI4LTEyOCAxMjgtMTI4IDEyOC0xMjgtNC02NSA2Ni0xMjhoLTY2cy0yNTYgMC0yNTYgMjU2IDI1NiAyNTYgMjU2IDI1NmgxOTJzMjU2IDAgMjU2LTI1NmMwLTIyLTQtNDQtOC02NHonLz4gPC9zdmc+Iik7DQogIGJhY2tncm91bmQtc2l6ZTogY29udGFpbjsNCiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDsNCiAgYmFja2dyb3VuZC1wb3NpdGlvbjogYm90dG9tOw0KfQ0KDQoub2N0aWNvbi1saW5rOmJlZm9yZXsNCiAgY29udGVudDonXGEwJzsNCn0NCg0KYm9keSBoMSxib2R5IGgyLGJvZHkgaDMsYm9keSBoNCxib2R5IGg1LGJvZHkgaDZ7DQogIG1hcmdpbjoxZW0gMCAxNXB4Ow0KICBwYWRkaW5nOjA7DQogIGZvbnQtd2VpZ2h0OmJvbGQ7DQogIGxpbmUtaGVpZ2h0OjEuNzsNCiAgY3Vyc29yOnRleHQ7DQogIHBvc2l0aW9uOnJlbGF0aXZlDQp9DQoNCmJvZHkgaDEgLm9jdGljb24tbGluayxib2R5IGgyIC5vY3RpY29uLWxpbmssYm9keSBoMyAub2N0aWNvbi1saW5rLGJvZHkgaDQgLm9jdGljb24tbGluayxib2R5IGg1IC5vY3RpY29uLWxpbmssYm9keSBoNiAub2N0aWNvbi1saW5rew0KICBkaXNwbGF5Om5vbmU7DQogIGNvbG9yOiMwMDANCn0NCg0KYm9keSBoMTpob3ZlciBhLmFuY2hvcixib2R5IGgyOmhvdmVyIGEuYW5jaG9yLGJvZHkgaDM6aG92ZXIgYS5hbmNob3IsYm9keSBoNDpob3ZlciBhLmFuY2hvcixib2R5IGg1OmhvdmVyIGEuYW5jaG9yLGJvZHkgaDY6aG92ZXIgYS5hbmNob3J7DQogIHRleHQtZGVjb3JhdGlvbjpub25lOw0KICBsaW5lLWhlaWdodDoxOw0KICBwYWRkaW5nLWxlZnQ6MDsNCiAgbWFyZ2luLWxlZnQ6LTIycHg7DQogIHRvcDoxNSUNCn0NCg0KYm9keSBoMTpob3ZlciBhLmFuY2hvciAub2N0aWNvbi1saW5rLGJvZHkgaDI6aG92ZXIgYS5hbmNob3IgLm9jdGljb24tbGluayxib2R5IGgzOmhvdmVyIGEuYW5jaG9yIC5vY3RpY29uLWxpbmssYm9keSBoNDpob3ZlciBhLmFuY2hvciAub2N0aWNvbi1saW5rLGJvZHkgaDU6aG92ZXIgYS5hbmNob3IgLm9jdGljb24tbGluayxib2R5IGg2OmhvdmVyIGEuYW5jaG9yIC5vY3RpY29uLWxpbmt7DQogIGRpc3BsYXk6aW5saW5lLWJsb2NrDQp9DQoNCmJvZHkgaDEgdHQsYm9keSBoMSBjb2RlLGJvZHkgaDIgdHQsYm9keSBoMiBjb2RlLGJvZHkgaDMgdHQsYm9keSBoMyBjb2RlLGJvZHkgaDQgdHQsYm9keSBoNCBjb2RlLGJvZHkgaDUgdHQsYm9keSBoNSBjb2RlLGJvZHkgaDYgdHQsYm9keSBoNiBjb2Rlew0KICBmb250LXNpemU6aW5oZXJpdA0KfQ0KDQpib2R5IGgxew0KICBmb250LXNpemU6Mi41ZW07DQogIGJvcmRlci1ib3R0b206MXB4IHNvbGlkICNkZGQNCn0NCg0KYm9keSBoMnsNCiAgZm9udC1zaXplOjJlbTsNCiAgYm9yZGVyLWJvdHRvbToxcHggc29saWQgI2VlZQ0KfQ0KDQpib2R5IGgzew0KICBmb250LXNpemU6MS41ZW0NCn0NCg0KYm9keSBoNHsNCiAgZm9udC1zaXplOjEuMmVtDQp9DQoNCmJvZHkgaDV7DQogIGZvbnQtc2l6ZToxZW0NCn0NCg0KYm9keSBoNnsNCiAgY29sb3I6Izc3NzsNCiAgZm9udC1zaXplOjFlbQ0KfQ0KDQpib2R5IHAsYm9keSBibG9ja3F1b3RlLGJvZHkgdWwsYm9keSBvbCxib2R5IGRsLGJvZHkgdGFibGUsYm9keSBwcmV7DQogIG1hcmdpbjoxNXB4IDANCn0NCg0KYm9keSBoMSB0dCxib2R5IGgxIGNvZGUsYm9keSBoMiB0dCxib2R5IGgyIGNvZGUsYm9keSBoMyB0dCxib2R5IGgzIGNvZGUsYm9keSBoNCB0dCxib2R5IGg0IGNvZGUsYm9keSBoNSB0dCxib2R5IGg1IGNvZGUsYm9keSBoNiB0dCxib2R5IGg2IGNvZGUNCnsNCiAgZm9udC1zaXplOmluaGVyaXQ7DQp9DQoNCg0KYm9keSBocg0Kew0KICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFBWUFBQUFFQ0FZQUFBQ3RCRTVEQUFBQUdYUkZXSFJUYjJaMGQyRnlaUUJCWkc5aVpTQkpiV0ZuWlZKbFlXUjVjY2xsUEFBQUF5SnBWRmgwV0UxTU9tTnZiUzVoWkc5aVpTNTRiWEFBQUFBQUFEdy9lSEJoWTJ0bGRDQmlaV2RwYmowaTc3dS9JaUJwWkQwaVZ6Vk5NRTF3UTJWb2FVaDZjbVZUZWs1VVkzcHJZemxrSWo4K0lEeDRPbmh0Y0cxbGRHRWdlRzFzYm5NNmVEMGlZV1J2WW1VNmJuTTZiV1YwWVM4aUlIZzZlRzF3ZEdzOUlrRmtiMkpsSUZoTlVDQkRiM0psSURVdU1DMWpNRFl3SURZeExqRXpORGMzTnl3Z01qQXhNQzh3TWk4eE1pMHhOem96TWpvd01DQWdJQ0FnSUNBZ0lqNGdQSEprWmpwU1JFWWdlRzFzYm5NNmNtUm1QU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh4T1RrNUx6QXlMekl5TFhKa1ppMXplVzUwWVhndGJuTWpJajRnUEhKa1pqcEVaWE5qY21sd2RHbHZiaUJ5WkdZNllXSnZkWFE5SWlJZ2VHMXNibk02ZUcxd1BTSm9kSFJ3T2k4dmJuTXVZV1J2WW1VdVkyOXRMM2hoY0M4eExqQXZJaUI0Yld4dWN6cDRiWEJOVFQwaWFIUjBjRG92TDI1ekxtRmtiMkpsTG1OdmJTOTRZWEF2TVM0d0wyMXRMeUlnZUcxc2JuTTZjM1JTWldZOUltaDBkSEE2THk5dWN5NWhaRzlpWlM1amIyMHZlR0Z3THpFdU1DOXpWSGx3WlM5U1pYTnZkWEpqWlZKbFppTWlJSGh0Y0RwRGNtVmhkRzl5Vkc5dmJEMGlRV1J2WW1VZ1VHaHZkRzl6YUc5d0lFTlROU0JOWVdOcGJuUnZjMmdpSUhodGNFMU5Pa2x1YzNSaGJtTmxTVVE5SW5odGNDNXBhV1E2T0VORFJqTkJOMEUyTlRaQk1URkZNRUkzUWpSQk9ETTROekpETWpsR05EZ2lJSGh0Y0UxTk9rUnZZM1Z0Wlc1MFNVUTlJbmh0Y0M1a2FXUTZPRU5EUmpOQk4wSTJOVFpCTVRGRk1FSTNRalJCT0RNNE56SkRNamxHTkRnaVBpQThlRzF3VFUwNlJHVnlhWFpsWkVaeWIyMGdjM1JTWldZNmFXNXpkR0Z1WTJWSlJEMGllRzF3TG1scFpEbzRRME5HTTBFM09EWTFOa0V4TVVVd1FqZENORUU0TXpnM01rTXlPVVkwT0NJZ2MzUlNaV1k2Wkc5amRXMWxiblJKUkQwaWVHMXdMbVJwWkRvNFEwTkdNMEUzT1RZMU5rRXhNVVV3UWpkQ05FRTRNemczTWtNeU9VWTBPQ0l2UGlBOEwzSmtaanBFWlhOamNtbHdkR2x2Ymo0Z1BDOXlaR1k2VWtSR1BpQThMM2c2ZUcxd2JXVjBZVDRnUEQ5NGNHRmphMlYwSUdWdVpEMGljaUkvUHFxZXpzVUFBQUFmU1VSQlZIamFZbVJBQmNZd0JpTTJRU0E0eTRoTkVLWURReEFFQUFJTUFITkdBemhrUE9sWUFBQUFBRWxGVGtTdVFtQ0MpOw0KICBiYWNrZ3JvdW5kLXJlcGVhdDogcmVwZWF0LXg7DQogIC8qYmFja2dyb3VuZDp0cmFuc3BhcmVudCB1cmwoaHR0cDovL292ZXJibG93bi5uZXQvZmlsZXMvbWFya2Rvd24vZGlydHktc2hhZGUucG5nKSByZXBlYXQteCAwIDA7Ki8NCiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7DQogIGJhY2tncm91bmQtcG9zaXRpb246IDA7DQogIGJvcmRlcjowIG5vbmU7DQogIGNvbG9yOiNjY2M7DQogIGhlaWdodDo0cHg7DQogIG1hcmdpbjoxNXB4IDA7DQogIHBhZGRpbmc6MDsNCn0NCg0KYm9keSBsaSBwLmZpcnN0DQp7DQogIGRpc3BsYXk6aW5saW5lLWJsb2NrOw0KfQ0KDQpib2R5IHVsLGJvZHkgb2wNCnsNCiAgcGFkZGluZy1sZWZ0OjMwcHg7DQp9DQoNCmJvZHkgdWwubm8tbGlzdCxib2R5IG9sLm5vLWxpc3QNCnsNCiAgbGlzdC1zdHlsZS10eXBlOm5vbmU7DQogIHBhZGRpbmc6MDsNCn0NCg0KYm9keSB1bCB1bCxib2R5IHVsIG9sLGJvZHkgb2wgb2wsYm9keSBvbCB1bA0Kew0KICBtYXJnaW4tYm90dG9tOjA7DQogIG1hcmdpbi10b3A6MDsNCn0NCg0KYm9keSBkbA0Kew0KICBwYWRkaW5nOjA7DQp9DQoNCmJvZHkgZGwgZHQNCnsNCiAgZm9udC1zaXplOjE0cHg7DQogIGZvbnQtc3R5bGU6aXRhbGljOw0KICBmb250LXdlaWdodDo3MDA7DQogIG1hcmdpbi10b3A6MTVweDsNCiAgcGFkZGluZzowOw0KfQ0KDQpib2R5IGRsIGRkDQp7DQogIG1hcmdpbi1ib3R0b206MTVweDsNCiAgcGFkZGluZzowIDE1cHg7DQp9DQoNCmJvZHkgYmxvY2txdW90ZQ0Kew0KICBib3JkZXItbGVmdDo0cHggc29saWQgI0RERDsNCiAgY29sb3I6Izc3NzsNCiAgcGFkZGluZzowIDE1cHg7DQp9DQoNCmJvZHkgYmxvY2txdW90ZT46Zmlyc3QtY2hpbGQNCnsNCiAgbWFyZ2luLXRvcDowOw0KfQ0KDQpib2R5IGJsb2NrcXVvdGU+Omxhc3QtY2hpbGQNCnsNCiAgbWFyZ2luLWJvdHRvbTowOw0KfQ0KDQpib2R5IHRhYmxlDQp7DQogIGRpc3BsYXk6YmxvY2s7DQogIG92ZXJmbG93OmF1dG87DQogIHdpZHRoOjEwMCU7DQogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7DQogIGJvcmRlci1zcGFjaW5nOiAwOw0KICBwYWRkaW5nOiAwOw0KfQ0KDQpib2R5IHRhYmxlIHRoDQp7DQogIGZvbnQtd2VpZ2h0OjcwMDsNCn0NCg0KYm9keSB0YWJsZSB0aCxib2R5IHRhYmxlIHRkDQp7DQogIGJvcmRlcjoxcHggc29saWQgI2RkZDsNCiAgcGFkZGluZzo2cHggMTNweDsNCn0NCg0KYm9keSB0YWJsZSB0cg0Kew0KICBiYWNrZ3JvdW5kLWNvbG9yOiNmZmY7DQogIGJvcmRlci10b3A6MXB4IHNvbGlkICNjY2M7DQp9DQoNCmJvZHkgdGFibGUgdHI6bnRoLWNoaWxkKDJuKQ0Kew0KICBiYWNrZ3JvdW5kLWNvbG9yOiNmOGY4Zjg7DQp9DQoNCmJvZHkgaW1nDQp7DQogIC1tb3otYm94LXNpemluZzpib3JkZXItYm94Ow0KICBib3gtc2l6aW5nOmJvcmRlci1ib3g7DQogIG1heC13aWR0aDoxMDAlOw0KfQ0KDQpib2R5IHNwYW4uZnJhbWUNCnsNCiAgZGlzcGxheTpibG9jazsNCiAgb3ZlcmZsb3c6aGlkZGVuOw0KfQ0KDQpib2R5IHNwYW4uZnJhbWU+c3Bhbg0Kew0KICBib3JkZXI6MXB4IHNvbGlkICNkZGQ7DQogIGRpc3BsYXk6YmxvY2s7DQogIGZsb2F0OmxlZnQ7DQogIG1hcmdpbjoxM3B4IDAgMDsNCiAgb3ZlcmZsb3c6aGlkZGVuOw0KICBwYWRkaW5nOjdweDsNCiAgd2lkdGg6YXV0bzsNCn0NCg0KYm9keSBzcGFuLmZyYW1lIHNwYW4gaW1nDQp7DQogIGRpc3BsYXk6YmxvY2s7DQogIGZsb2F0OmxlZnQ7DQp9DQoNCmJvZHkgc3Bhbi5mcmFtZSBzcGFuIHNwYW4NCnsNCiAgY2xlYXI6Ym90aDsNCiAgY29sb3I6IzMzMzsNCiAgZGlzcGxheTpibG9jazsNCiAgcGFkZGluZzo1cHggMCAwOw0KfQ0KDQpib2R5IHNwYW4uYWxpZ24tY2VudGVyDQp7DQogIGNsZWFyOmJvdGg7DQogIGRpc3BsYXk6YmxvY2s7DQogIG92ZXJmbG93OmhpZGRlbjsNCn0NCg0KYm9keSBzcGFuLmFsaWduLWNlbnRlcj5zcGFuDQp7DQogIGRpc3BsYXk6YmxvY2s7DQogIG1hcmdpbjoxM3B4IGF1dG8gMDsNCiAgb3ZlcmZsb3c6aGlkZGVuOw0KICB0ZXh0LWFsaWduOmNlbnRlcjsNCn0NCg0KYm9keSBzcGFuLmFsaWduLWNlbnRlciBzcGFuIGltZw0Kew0KICBtYXJnaW46MCBhdXRvOw0KICB0ZXh0LWFsaWduOmNlbnRlcjsNCn0NCg0KYm9keSBzcGFuLmFsaWduLXJpZ2h0DQp7DQogIGNsZWFyOmJvdGg7DQogIGRpc3BsYXk6YmxvY2s7DQogIG92ZXJmbG93OmhpZGRlbjsNCn0NCg0KYm9keSBzcGFuLmFsaWduLXJpZ2h0PnNwYW4NCnsNCiAgZGlzcGxheTpibG9jazsNCiAgbWFyZ2luOjEzcHggMCAwOw0KICBvdmVyZmxvdzpoaWRkZW47DQogIHRleHQtYWxpZ246cmlnaHQ7DQp9DQoNCmJvZHkgc3Bhbi5hbGlnbi1yaWdodCBzcGFuIGltZw0Kew0KICBtYXJnaW46MDsNCiAgdGV4dC1hbGlnbjpyaWdodDsNCn0NCg0KYm9keSBzcGFuLmZsb2F0LWxlZnQNCnsNCiAgZGlzcGxheTpibG9jazsNCiAgZmxvYXQ6bGVmdDsNCiAgbWFyZ2luLXJpZ2h0OjEzcHg7DQogIG92ZXJmbG93OmhpZGRlbjsNCn0NCg0KYm9keSBzcGFuLmZsb2F0LWxlZnQgc3Bhbg0Kew0KICBtYXJnaW46MTNweCAwIDA7DQp9DQoNCmJvZHkgc3Bhbi5mbG9hdC1yaWdodA0Kew0KICBkaXNwbGF5OmJsb2NrOw0KICBmbG9hdDpyaWdodDsNCiAgbWFyZ2luLWxlZnQ6MTNweDsNCiAgb3ZlcmZsb3c6aGlkZGVuOw0KfQ0KDQpib2R5IHNwYW4uZmxvYXQtcmlnaHQ+c3Bhbg0Kew0KICBkaXNwbGF5OmJsb2NrOw0KICBtYXJnaW46MTNweCBhdXRvIDA7DQogIG92ZXJmbG93OmhpZGRlbjsNCiAgdGV4dC1hbGlnbjpyaWdodDsNCn0NCg0KYm9keSBjb2RlLGJvZHkgdHQNCnsNCiAgYmFja2dyb3VuZC1jb2xvcjojZjhmOGY4Ow0KICBib3JkZXI6MXB4IHNvbGlkICNkZGQ7DQogIGJvcmRlci1yYWRpdXM6M3B4Ow0KICBtYXJnaW46MCAycHg7DQogIHBhZGRpbmc6MCA1cHg7DQp9DQoNCmJvZHkgY29kZQ0Kew0KICB3aGl0ZS1zcGFjZTpub3dyYXA7DQp9DQoNCg0KY29kZSxwcmV7DQogIGZvbnQtZmFtaWx5OkNvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgQ291cmllciwgbW9ub3NwYWNlOw0KICBmb250LXNpemU6MTJweA0KfQ0KDQpib2R5IHByZT5jb2RlDQp7DQogIGJhY2tncm91bmQ6dHJhbnNwYXJlbnQ7DQogIGJvcmRlcjpub25lOw0KICBtYXJnaW46MDsNCiAgcGFkZGluZzowOw0KICB3aGl0ZS1zcGFjZTpwcmU7DQp9DQoNCmJvZHkgLmhpZ2hsaWdodCBwcmUsYm9keSBwcmUNCnsNCiAgYmFja2dyb3VuZC1jb2xvcjojZjhmOGY4Ow0KICBib3JkZXI6MXB4IHNvbGlkICNkZGQ7DQogIGZvbnQtc2l6ZToxM3B4Ow0KICBsaW5lLWhlaWdodDoxOXB4Ow0KICBvdmVyZmxvdzphdXRvOw0KICBwYWRkaW5nOjZweCAxMHB4Ow0KICBib3JkZXItcmFkaXVzOjNweA0KfQ0KDQpib2R5IHByZSBjb2RlLGJvZHkgcHJlIHR0DQp7DQogIGJhY2tncm91bmQtY29sb3I6dHJhbnNwYXJlbnQ7DQogIGJvcmRlcjpub25lOw0KICBtYXJnaW46MDsNCiAgcGFkZGluZzowOw0KfQ0KDQpib2R5IC50YXNrLWxpc3R7DQogIGxpc3Qtc3R5bGUtdHlwZTpub25lOw0KICBwYWRkaW5nLWxlZnQ6MTBweA0KfQ0KDQoudGFzay1saXN0LWl0ZW17DQogIHBhZGRpbmctbGVmdDoyMHB4DQp9DQoNCi50YXNrLWxpc3QtaXRlbSBsYWJlbHsNCiAgZm9udC13ZWlnaHQ6bm9ybWFsDQp9DQoNCi50YXNrLWxpc3QtaXRlbS5lbmFibGVkIGxhYmVsew0KICBjdXJzb3I6cG9pbnRlcg0KfQ0KDQoudGFzay1saXN0LWl0ZW0rLnRhc2stbGlzdC1pdGVtew0KICBtYXJnaW4tdG9wOjVweA0KfQ0KDQoudGFzay1saXN0LWl0ZW0tY2hlY2tib3h7DQogIGZsb2F0OmxlZnQ7DQogIG1hcmdpbi1sZWZ0Oi0yMHB4Ow0KICBtYXJnaW4tdG9wOjdweA0KfQ0KDQoNCi5oaWdobGlnaHR7DQogIGJhY2tncm91bmQ6I2ZmZmZmZg0KfQ0KDQouaGlnaGxpZ2h0IC5jew0KICBjb2xvcjojOTk5OTg4Ow0KICBmb250LXN0eWxlOml0YWxpYw0KfQ0KDQouaGlnaGxpZ2h0IC5lcnJ7DQogIGNvbG9yOiNhNjE3MTc7DQogIGJhY2tncm91bmQtY29sb3I6I2UzZDJkMg0KfQ0KDQouaGlnaGxpZ2h0IC5rew0KICBmb250LXdlaWdodDpib2xkDQp9DQoNCi5oaWdobGlnaHQgLm97DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAuY217DQogIGNvbG9yOiM5OTk5ODg7DQogIGZvbnQtc3R5bGU6aXRhbGljDQp9DQoNCi5oaWdobGlnaHQgLmNwew0KICBjb2xvcjojOTk5OTk5Ow0KICBmb250LXdlaWdodDpib2xkDQp9DQoNCi5oaWdobGlnaHQgLmMxew0KICBjb2xvcjojOTk5OTg4Ow0KICBmb250LXN0eWxlOml0YWxpYw0KfQ0KDQouaGlnaGxpZ2h0IC5jc3sNCiAgY29sb3I6Izk5OTk5OTsNCiAgZm9udC13ZWlnaHQ6Ym9sZDsNCiAgZm9udC1zdHlsZTppdGFsaWMNCn0NCg0KLmhpZ2hsaWdodCAuZ2R7DQogIGNvbG9yOiMwMDAwMDA7DQogIGJhY2tncm91bmQtY29sb3I6I2ZmZGRkZA0KfQ0KDQouaGlnaGxpZ2h0IC5nZCAueHsNCiAgY29sb3I6IzAwMDAwMDsNCiAgYmFja2dyb3VuZC1jb2xvcjojZmZhYWFhDQp9DQoNCi5oaWdobGlnaHQgLmdlew0KICBmb250LXN0eWxlOml0YWxpYw0KfQ0KDQouaGlnaGxpZ2h0IC5ncnsNCiAgY29sb3I6I2FhMDAwMA0KfQ0KDQouaGlnaGxpZ2h0IC5naHsNCiAgY29sb3I6Izk5OTk5OQ0KfQ0KDQouaGlnaGxpZ2h0IC5naXsNCiAgY29sb3I6IzAwMDAwMDsNCiAgYmFja2dyb3VuZC1jb2xvcjojZGRmZmRkDQp9DQoNCi5oaWdobGlnaHQgLmdpIC54ew0KICBjb2xvcjojMDAwMDAwOw0KICBiYWNrZ3JvdW5kLWNvbG9yOiNhYWZmYWENCn0NCg0KLmhpZ2hsaWdodCAuZ297DQogIGNvbG9yOiM4ODg4ODgNCn0NCg0KLmhpZ2hsaWdodCAuZ3B7DQogIGNvbG9yOiM1NTU1NTUNCn0NCg0KLmhpZ2hsaWdodCAuZ3N7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAuZ3V7DQogIGNvbG9yOiM4MDAwODA7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAuZ3R7DQogIGNvbG9yOiNhYTAwMDANCn0NCg0KLmhpZ2hsaWdodCAua2N7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAua2R7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAua257DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAua3B7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAua3J7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAua3R7DQogIGNvbG9yOiM0NDU1ODg7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAubXsNCiAgY29sb3I6IzAwOTk5OQ0KfQ0KDQouaGlnaGxpZ2h0IC5zew0KICBjb2xvcjojZDE0DQp9DQoNCi5oaWdobGlnaHQgLm57DQogIGNvbG9yOiMzMzMzMzMNCn0NCg0KLmhpZ2hsaWdodCAubmF7DQogIGNvbG9yOiMwMDgwODANCn0NCg0KLmhpZ2hsaWdodCAubmJ7DQogIGNvbG9yOiMwMDg2QjMNCn0NCg0KLmhpZ2hsaWdodCAubmN7DQogIGNvbG9yOiM0NDU1ODg7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAubm97DQogIGNvbG9yOiMwMDgwODANCn0NCg0KLmhpZ2hsaWdodCAubml7DQogIGNvbG9yOiM4MDAwODANCn0NCg0KLmhpZ2hsaWdodCAubmV7DQogIGNvbG9yOiM5OTAwMDA7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAubmZ7DQogIGNvbG9yOiM5OTAwMDA7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAubm57DQogIGNvbG9yOiM1NTU1NTUNCn0NCg0KLmhpZ2hsaWdodCAubnR7DQogIGNvbG9yOiMwMDAwODANCn0NCg0KLmhpZ2hsaWdodCAubnZ7DQogIGNvbG9yOiMwMDgwODANCn0NCg0KLmhpZ2hsaWdodCAub3d7DQogIGZvbnQtd2VpZ2h0OmJvbGQNCn0NCg0KLmhpZ2hsaWdodCAud3sNCiAgY29sb3I6I2JiYmJiYg0KfQ0KDQouaGlnaGxpZ2h0IC5tZnsNCiAgY29sb3I6IzAwOTk5OQ0KfQ0KDQouaGlnaGxpZ2h0IC5taHsNCiAgY29sb3I6IzAwOTk5OQ0KfQ0KDQouaGlnaGxpZ2h0IC5taXsNCiAgY29sb3I6IzAwOTk5OQ0KfQ0KDQouaGlnaGxpZ2h0IC5tb3sNCiAgY29sb3I6IzAwOTk5OQ0KfQ0KDQouaGlnaGxpZ2h0IC5zYnsNCiAgY29sb3I6I2QxNA0KfQ0KDQouaGlnaGxpZ2h0IC5zY3sNCiAgY29sb3I6I2QxNA0KfQ0KDQouaGlnaGxpZ2h0IC5zZHsNCiAgY29sb3I6I2QxNA0KfQ0KDQouaGlnaGxpZ2h0IC5zMnsNCiAgY29sb3I6I2QxNA0KfQ0KDQouaGlnaGxpZ2h0IC5zZXsNCiAgY29sb3I6I2QxNA0KfQ0KDQouaGlnaGxpZ2h0IC5zaHsNCiAgY29sb3I6I2QxNA0KfQ0KDQouaGlnaGxpZ2h0IC5zaXsNCiAgY29sb3I6I2QxNA0KfQ0KDQouaGlnaGxpZ2h0IC5zeHsNCiAgY29sb3I6I2QxNA0KfQ0KDQouaGlnaGxpZ2h0IC5zcnsNCiAgY29sb3I6IzAwOTkyNg0KfQ0KDQouaGlnaGxpZ2h0IC5zMXsNCiAgY29sb3I6I2QxNA0KfQ0KDQouaGlnaGxpZ2h0IC5zc3sNCiAgY29sb3I6Izk5MDA3Mw0KfQ0KDQouaGlnaGxpZ2h0IC5icHsNCiAgY29sb3I6Izk5OTk5OQ0KfQ0KDQouaGlnaGxpZ2h0IC52Y3sNCiAgY29sb3I6IzAwODA4MA0KfQ0KDQouaGlnaGxpZ2h0IC52Z3sNCiAgY29sb3I6IzAwODA4MA0KfQ0KDQouaGlnaGxpZ2h0IC52aXsNCiAgY29sb3I6IzAwODA4MA0KfQ0KDQouaGlnaGxpZ2h0IC5pbHsNCiAgY29sb3I6IzAwOTk5OQ0KfQ0KDQouaGlnaGxpZ2h0IC5nY3sNCiAgY29sb3I6Izk5OTsNCiAgYmFja2dyb3VuZC1jb2xvcjojRUFGMkY1DQp9DQoNCi50eXBlLWNzaGFycCAuaGlnaGxpZ2h0IC5rew0KICBjb2xvcjojMDAwMEZGDQp9DQoNCi50eXBlLWNzaGFycCAuaGlnaGxpZ2h0IC5rdHsNCiAgY29sb3I6IzAwMDBGRg0KfQ0KDQoudHlwZS1jc2hhcnAgLmhpZ2hsaWdodCAubmZ7DQogIGNvbG9yOiMwMDAwMDA7DQogIGZvbnQtd2VpZ2h0Om5vcm1hbA0KfQ0KDQoudHlwZS1jc2hhcnAgLmhpZ2hsaWdodCAubmN7DQogIGNvbG9yOiMyQjkxQUYNCn0NCg0KLnR5cGUtY3NoYXJwIC5oaWdobGlnaHQgLm5uew0KICBjb2xvcjojMDAwMDAwDQp9DQoNCi50eXBlLWNzaGFycCAuaGlnaGxpZ2h0IC5zew0KICBjb2xvcjojQTMxNTE1DQp9DQoNCi50eXBlLWNzaGFycCAuaGlnaGxpZ2h0IC5zY3sNCiAgY29sb3I6I0EzMTUxNQ0KfQ==">
+<!--
+<span class="author">tfw</span>
+-->
+<span class="date" style='float:right'>20170417</span>
+</header>
+
+<nav id="TOC">
+<h3>TOC</h3>
+<ul>
+<li><a href="#arp">arp</a><ul>
+<li><a href="#notes-and-explanations">NOTES and EXPLANATIONS</a></li>
+<li><a href="#windows-devs">WINDOWS DEVS</a></li>
+<li><a href="#non-windows-noop">NON-WINDOWS (noop)</a></li>
+</ul></li>
+<li><a href="#arpeggiators">Arpeggiators</a><ul>
+<li><a href="#clocktiming">CLOCK/TIMING</a></li>
+</ul></li>
+<li><a href="#license">license</a></li>
+</ul>
+</nav>
+<h1 id="arp">arp</h1>
+<p>[WIP] a simple arpeggiator vst instrument/effect using iplug/wdl-ol;</p>
+<p>its a fairly simple arpeggiator called ‘arpeggio’ for the moment.</p>
+<p>accompanied by the horrible readme…</p>
+<p>To tell you the honest truth, I don’t know how much time I’m going to be spending on updating this. It just kind of popped into existance over the past couple weeks and fleshed into what you see—guess we’ll see what this turns into. Mostly, I just wanted to elaborte some midi-controller enhancements for playing with my midi-piano in ardour as well as perhaps sandbox some MIDI timing/triggering stuff. Also there are no binaries at the moment until I get a few more ramp types and possibly re-work the UI a bit (am in no rush). I’d say that this is a pretty decent IPLUG/WDL-OL MIDI example, but there are a few IPLUG hacks and also its not quite cross-platform at the moment.</p>
+<figure>
+<img src="resources/img/20170421_2251cst.png" />
+</figure>
+<ul>
+<li><strong>PITCH CONTROL</strong> (§ee notes)<br /> knob to re-pitch [-128 to 127].</li>
+<li><strong>UI KEYBOARD</strong> (§ee notes)
+<ul>
+<li>left click sends midi messages downstream</li>
+<li>right click (and drag) to clear depressed notes</li>
+<li>middle-click on the keys to depress a given key</li>
+</ul></li>
+<li>“<strong>K-AMP</strong>” on/off switch/button toggles enabling a amplitude knob which forces midi messages to the particular amp or otherwise relies on what you press in your midi keyboard (or in the tiny UI keys—the lower the louder)</li>
+<li><strong>GATE</strong> (§ee notes)<br /> knob controls the percentage (1-200%) of the note length. It could easily overlap and mess up your on/off triggers if you’re not wise in using it ;)</li>
+<li><strong>TIMING</strong>: BEATS (1-16) VS DIVS (1-64) knobs for controlling as well as…<br /> an array of trigger buttons that trigger different timings. It was kind of just thrown into the concept and left there as it is for the time being.<br /> Currently there are three rows. the first TOP row are [1/n] divisions. Second row: [3/n] divisions and finally [4/n] divisions. Will likely change the potential beat-count parameter to be a higher maximum setting such as 64 and perhaps even something arbitrary, set by user.</li>
+<li><strong>SYNC</strong> button [on/off] should sync the timing to the DAW transport/clock if the transport is running. if for some reason it loses sync, hit play in your daw’s transport and when you press ‘stop’ it will have re-synced (of course if sync was enabled when you did this)</li>
+<li><strong>PANIC</strong> button (triangle looking thing near the KB) releases all depressed keys/notes</li>
+<li><strong>RAMPING</strong> 4 ramp modes at the moment: up, down, up-down and down-up. I’ll probably release binaries when I get the last two ramping methods in there; or is it four more. Am looking to add something like [0-1-2-1-2-3*], its reversal and ping-pongs for each direction.</li>
+</ul>
+<h2 id="notes-and-explanations">NOTES and EXPLANATIONS</h2>
+<p><strong>PITCH CONTROL</strong> — Ignores notes calculated out of range of [0-127]. This is one of the last intended features that I added and once I played with it, I was a bit let down to see that I’m now going to have to clean up and predict when notes are going to bump into each other. For tinkering around, this feature is fine but if you are looking to generate clean MIDI when tinkering around with this guy, you will find erronious MIDI data needing cleaning.</p>
+<p><strong>UI KEYBOARD</strong> — Is a little buggy when it comes to turning off the last note depressed since I had spent the least amount of time working a few changes into Tale’s MIDI-Keyboard <code>IControl</code>. You’re better off just right-clicking to wipe clean all the notes and use the MIDDLE-CLICK-BUTTON to set whatever it is that you’re trying to depress.</p>
+<p>The Keyboard acts as your MIDI keyboard until you click with the MIDDLE_BUTTON (Mouse Wheel Button) to get a key (or many) to “stick”, and use the RIGHT_CLICK to clear the keys depressed as such.</p>
+<hr />
+<p>Concerning the pitch-control and timing trigger buttons: If you go all button crazy, you’re bound to generate some unwanted MIDI.</p>
+<h2 id="windows-devs">WINDOWS DEVS</h2>
+<ul>
+<li>wdl-ol/iplug</li>
+<li>see github.com/tfwio/twix
+<ul>
+<li>common includes and few cpp dependencies are in there.</li>
+<li>wihtout the notes on the readme there this would be fairly difficult to compile.</li>
+</ul></li>
+<li>using VisualStudio 2013 Express load the SLN (<strong>Arpeggio.sln</strong>)
+<ul>
+<li><strong>arpeggio_i-vst2.vcproj</strong> some DAW that can’t handle VST-midi-effect specs so there’s an instrument version.</li>
+<li><strong>arpeggio-vst2.vcproj</strong> is the effect version that works in DAWs properly supporting VST midi effects.</li>
+</ul></li>
+</ul>
+<h2 id="non-windows-noop">NON-WINDOWS (noop)</h2>
+<p>It would be nice to see this working on a mac but I’m probably not going to be getting to that, though I’d like to write up some makefiles for mingw/msys2. If you would like to get it working in something other than windows, you’re going to have to reference the vcproj’s until that imaginary day makefiles or some other reference comes into existance. Also (again), we’re going to need to parallel and clean up a couple of things like a few mouse-related API (that aren’t implemented yet here in a particular number-control), the timer mechanism noted in the ‘twix’ readme and perhaps some other things that are hard-wired to windows if I missed something I didn’t document —there really shouldn’t be any real difficulty I’m thinking, once all the right files, paths and preprocessor definitions are in place.</p>
+<h1 id="arpeggiators">Arpeggiators</h1>
+<p><strong>WHAT IS AN ARPEGGIATOR?</strong><br /><a href="http://archive.oreilly.com/pub/a/oreilly/digitalmedia/2006/06/29/secrets-of-the-arpeggiator.html">Secrets of the Arpeggiator</a> — by Jim Atkin of O’Reilly Digital-Media (20060629).<br />Wikipedia — <a href="https://en.wikipedia.org/wiki/Arpeggio">Arpeggio</a></p>
+<p>Firstly, most DAW include some form of an arpeggiator.</p>
+<p>The following table is what has it my radar. There are more.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: left;">vendor uri</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Blue Arp</td>
+<td style="text-align: left;">free</td>
+<td style="text-align: left;"><a href="http://graywolf2004.net/wp/">graywolf2004.net</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Catanya</td>
+<td style="text-align: left;">commercial</td>
+<td style="text-align: left;"><a href="http://www.synthtopia.com/content/2009/08/07/catanya-vst-midi-arpeggiator-plugin/">see me</a>, search youtube.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kirnu</td>
+<td style="text-align: left;">commercial*</td>
+<td style="text-align: left;"><a href="http://www.kirnuarp.com/">kirnuarp.com</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nora, NoraCM</td>
+<td style="text-align: left;">commercial*</td>
+<td style="text-align: left;"><a href="https://squaredheads.com/">squaredheads.com</a></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>*<em>Kirnu demo doesn’t allow you to store presets but works fine otherwise (I’m told)</em></li>
+<li>*<em>NoraCM is distributed with Computer Music magazine (including digital editions).</em></li>
+</ul>
+<h2 id="clocktiming">CLOCK/TIMING</h2>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// timing calculation</span>
+<span class="kw">inline</span> int32 calculate()
+{
+  Bb = ((<span class="fl">60.</span><span class="dv">0</span> * mSampleRate / mBpm));
+  Lb = <span class="dt">double</span>(mBeat) * (<span class="fl">1.</span> / <span class="dt">double</span>(mDiv)); 
+  <span class="kw">if</span> (Lb &lt;= <span class="fl">0.</span>) Lb = <span class="fl">0.</span><span class="bn">00001</span>; <span class="co">// prevent zero division</span>
+
+  <span class="dt">double</span> actualLength = Bb * Lb;
+  mNoteDurationOn = int32(floor(actualLength));
+  mNoteDurationOff = int32(floor((actualLength * mGateDiv))); <span class="co">// *bad</span>
+
+  <span class="kw">return</span> mNoteDurationOn;
+}</code></pre>
+<ul>
+<li>Bb (class member) is our calculated beat</li>
+<li>Lb (class member) is the length of a beat division.</li>
+</ul>
+<h1 id="license">license</h1>
+<p>some version of this will remain here in the public domain as such.<br />see the MIT license if you really want to read something.</p>
+</body>
+</html><style>
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>

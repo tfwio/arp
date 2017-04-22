@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="app">
+      <UniqueIdentifier>{6a6c24bd-7110-4436-97af-07990da17abf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app\RtAudioMidi">
+      <UniqueIdentifier>{ef87c677-1479-44bc-aef8-7ba960ef233d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app\ASIO_SDK">
+      <UniqueIdentifier>{b91b9db4-5584-4959-a395-7394ba3cf5a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="twix-inc">
+      <UniqueIdentifier>{a563b211-a718-4ad1-b59c-ec7e98f58adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp">
+      <UniqueIdentifier>{8cba1e77-bae7-42bd-bd22-1758643f01b6}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="cpp">
+      <UniqueIdentifier>{0a0c805c-e568-4e13-a174-48863045d9c5}</UniqueIdentifier>
+      <Extensions>cpp;c</Extensions>
+    </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>{3d0e8537-c69b-4201-8a01-b850eb831b36}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\WDL\rtaudiomidi\RtAudio.h">
+      <Filter>app\RtAudioMidi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WDL\rtaudiomidi\RtError.h">
+      <Filter>app\RtAudioMidi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WDL\rtaudiomidi\RtMidi.h">
+      <Filter>app\RtAudioMidi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ASIO_SDK\asiosys.h">
+      <Filter>app\ASIO_SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ASIO_SDK\ginclude.h">
+      <Filter>app\ASIO_SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ASIO_SDK\iasiodrv.h">
+      <Filter>app\ASIO_SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ASIO_SDK\asio.h">
+      <Filter>app\ASIO_SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ASIO_SDK\asiodrivers.h">
+      <Filter>app\ASIO_SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ASIO_SDK\asiolist.h">
+      <Filter>app\ASIO_SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="app_wrapper\app_main.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WDL\IPlug\IPlugStandalone.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IBitmapButton.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\ICControl.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\ICControls.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IChannelStateManager.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IColDetail.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IColNumber.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\ICPanelControl.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IFloatNumberPanel.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IKnobText.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IRenderHelper.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\MidiNode.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\on.defs.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\SortedInt.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\TimingInterval.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\on.tfwio.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\on.smf.h">
+      <Filter>twix-inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Arpeggio.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyboardControl-Mod.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="MidiArpeggiator.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="MidiNode.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="app_wrapper\app_resource.h">
+      <Filter>res</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>res</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\WDL\rtaudiomidi\RtAudio.cpp">
+      <Filter>app\RtAudioMidi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WDL\rtaudiomidi\RtMidi.cpp">
+      <Filter>app\RtAudioMidi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ASIO_SDK\asio.cpp">
+      <Filter>app\ASIO_SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ASIO_SDK\asiodrivers.cpp">
+      <Filter>app\ASIO_SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ASIO_SDK\asiolist.cpp">
+      <Filter>app\ASIO_SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="app_wrapper\app_dialog.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="app_wrapper\app_main.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WDL\IPlug\IPlugStandalone.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="Arpeggio.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\twix\source\ICControls.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Arpeggio.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Arpeggio.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\WDL\IPlug\IPlugVST.cpp">
+      <Filter>vst2</Filter>
+    </ClCompile>
+    <ClCompile Include="Arpeggio.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\twix\source\ICControls.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\WDL\IPlug\IPlugVST.h">
+      <Filter>vst2</Filter>
+    </ClInclude>
+    <ClInclude Include="Arpeggio.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlugInfo.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="MidiArpeggiator.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>rc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\Delegate.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\GallantSignal.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IADSR.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IBitmapButton.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IBitmapButton-shoddy.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\ICControl.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\ICControls.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IChannelStateManager.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IColDetail.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IColNumber.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\ICPanelControl.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IFloatBuffer.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IFloatNumberPanel.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IKnobText.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IOscEnvelope.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\IRenderHelper.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\MidiNode.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\on.defs.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\on.tfwio.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\snd.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\SortedInt.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\twix\include\TimingInterval.h">
+      <Filter>twix</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyboardControl-Mod.h">
+      <Filter>header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="vst2">
+      <UniqueIdentifier>{ea16de74-9d15-4c60-ba09-d0924088d3e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{3b70fdaa-eb44-4416-9934-d28ae787bef7}</UniqueIdentifier>
+      <Extensions>c;cxx;cpp;cc</Extensions>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{3c380386-fee9-461b-b259-3c9081c57e57}</UniqueIdentifier>
+      <Extensions>h;hpp;hh</Extensions>
+    </Filter>
+    <Filter Include="rc">
+      <UniqueIdentifier>{ad3e238e-5613-4632-9eec-d35380e535a1}</UniqueIdentifier>
+      <Extensions>rc</Extensions>
+    </Filter>
+    <Filter Include="twix">
+      <UniqueIdentifier>{41b58672-e358-48a0-8d25-ed32b766890f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Arpeggio.rc">
+      <Filter>rc</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cc.map" />
+  </ItemGroup>
+</Project>
