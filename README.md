@@ -142,7 +142,7 @@ Also (again), we're going to need to parallel and clean up a couple of things li
 
 # license
 
-MIT
+MIT and/or whatever GPL &mdash; future revisions may alter
 
 <!--https://vignette4.wikia.nocookie.net/looneytunes/images/b/b1/Daffypearl.gif/revision/latest?cb=20060212075938-->
 
