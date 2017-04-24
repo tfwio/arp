@@ -142,8 +142,7 @@ Also (again), we're going to need to parallel and clean up a couple of things li
 
 # license
 
-some version of this will remain here in the public domain as such.  
-see the MIT license if you really want to read something.
+MIT
 
 <!--https://vignette4.wikia.nocookie.net/looneytunes/images/b/b1/Daffypearl.gif/revision/latest?cb=20060212075938-->
 
