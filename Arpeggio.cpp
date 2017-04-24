@@ -11,8 +11,8 @@
 
 const int kNumPrograms = 1;
 
-#define ttf1 "Montserrat"
-#define ttf2 "Liberation Mono"
+#define ttf1 "Montserrat1"
+#define ttf2 "Liberation Mono1"
 
 enum ELayout
 {
