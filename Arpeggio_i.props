@@ -8,7 +8,7 @@
     <Import Project="..\..\twix\twix-include.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
-    <BINARY_NAME>Arpeggio_i</BINARY_NAME>
+    <BINARY_NAME>arpeggio_i</BINARY_NAME>
     <!-- This doesn't get picked up probably because configuration was not yet defined. -->
     <BINARY_NAME Condition=" '$(Configuration)' == 'Release_Inst' ">Arpeggio_i</BINARY_NAME>
     <APP_DEFS>SA_API;__WINDOWS_DS__;__WINDOWS_MM__;__WINDOWS_ASIO__;</APP_DEFS>
