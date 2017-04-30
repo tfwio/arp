@@ -1,10 +1,10 @@
 #define PLUG_MFR "tfw.io"
-#define PLUG_NAME "Arpeggio"
+#define PLUG_NAME "arpeggio"
 
 #define PLUG_CLASS_NAME Arpeggio
 
 #define BUNDLE_MFR "tfw.io"
-#define BUNDLE_NAME "Arpeggio"
+#define BUNDLE_NAME "arpeggio"
 
 #define PLUG_ENTRY Arpeggio_Entry
 #define PLUG_VIEW_ENTRY Arpeggio_ViewEntry
@@ -68,9 +68,16 @@ instrument determined by PLUG _IS _INST
 #define silver_knob48  "resources/img/knob_48_silver.png"
 #define silver_knob2   "resources/img/knob_48_silver-c.png"
 #define silver_tiny24  "resources/img/simple_e_24-v.png"
+#define moo_knob24     "resources/img/testing_24-v.png"
+#define moo_knob36     "resources/img/testing_36-v.png"
+#define moo_knob48     "resources/img/testing_48-v.png"
+#define mooc_knob24    "resources/img/moo-cyc_24-vm.png"
+#define mooc_knob36    "resources/img/moo-cyc_36-v.png"
 // IMAGES knob_48_silver demo_f64-2_36-v
-#define RES_KNOB_FN     silver_knob36c
-#define RES_IMG_KNOB24_FN "resources/img/simple_e_24-v.png"
+//// silver_knob36c
+#define RES_KNOB_FN     silver_knob36c 
+// "resources/img/simple_e_24-v.png"
+#define RES_IMG_KNOB24_FN silver_tiny24 
 #define RES_BG_FN       "resources/img/arpeggio.png"
 #define RES_BUTTON_FN   "resources/img/img_sync.png"
 #define RES_IMG_1_2_FN  "resources/img/img_1_2.png"
