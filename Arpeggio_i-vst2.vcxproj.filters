@@ -21,6 +21,18 @@
     <ClInclude Include="IPlugInfo.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="IKnobText.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="MidiArpeggiator.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>rc</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyboardControl-Mod.h">
+      <Filter>header</Filter>
+    </ClInclude>
     <ClInclude Include="IBitmapButton.h">
       <Filter>header</Filter>
     </ClInclude>
@@ -42,34 +54,22 @@
     <ClInclude Include="IFloatNumberPanel.h">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="IKnobText.h">
+    <ClInclude Include="IRenderHelper.h">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="IRenderHelper.h">
+    <ClInclude Include="MidiNode.h">
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="on.defs.h">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="MidiArpeggiator.h">
-      <Filter>header</Filter>
-    </ClInclude>
     <ClInclude Include="SortedInt.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>rc</Filter>
-    </ClInclude>
-    <ClInclude Include="IKeyboardControl-Mod.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="TimingInterval.h">
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="tfwio.h">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="MidiNode.h">
+    <ClInclude Include="TimingInterval.h">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Arpeggio" />
+		<Option title="Arpeggio-app" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -32,7 +32,7 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add option="-O1" />
 					<Add option="-msse2" />
 					<Add option="-ffast-math" />
 					<Add option="-DSA_API" />
@@ -44,6 +44,9 @@
 					<Add option="-DPNG_LIBPNG_SPECIALBUILD" />
 					<Add option="-DNDEBUG" />
 				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
 			</Target>
 			<Target title="Tracer Win32">
 				<Option output="build-win-cb-app/Arpeggio" prefix_auto="1" extension_auto="1" />
@@ -79,11 +82,13 @@
 			<Add directory="../../WDL" />
 			<Add directory="../../WDL/rtaudiomidi" />
 			<Add directory="../../ASIO_SDK" />
+			<Add directory="../../twix/include" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="./" />
 		</ResourceCompiler>
 		<Linker>
+			<Add option="-static" />
 			<Add library="libkernel32" />
 			<Add library="libwininet" />
 			<Add library="libuser32" />
@@ -100,6 +105,8 @@
 			<Add library="libcomctl32" />
 			<Add library="libdsound" />
 			<Add library="libwinmm" />
+			<Add library="boost_system-mt" />
+			<Add library="boost_filesystem-mt" />
 		</Linker>
 		<Unit filename="../../ASIO_SDK/asio.cpp" />
 		<Unit filename="../../ASIO_SDK/asio.h" />
@@ -261,11 +268,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../WDL/zlib/zutil.h" />
+		<Unit filename="../../twix/source/ICControls.cpp" />
 		<Unit filename="Arpeggio-app.cbp.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
 		<Unit filename="Arpeggio.cpp" />
 		<Unit filename="Arpeggio.h" />
+		<Unit filename="IKeyboardControl-Mod.h" />
+		<Unit filename="MidiArpeggiator.h" />
 		<Unit filename="app_wrapper/app_dialog.cpp" />
 		<Unit filename="app_wrapper/app_main.cpp" />
 		<Unit filename="app_wrapper/app_main.h" />

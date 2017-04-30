@@ -5,14 +5,18 @@
 
 #include "Arpeggio.h"
 #include "IPlug_include_in_plug_src.h"
+#ifndef _ICONTROL_
 #include "IControl.h"
+#endif
 #include "resource.h"
+
 #include "IKeyboardControl-mod.h"
 
 const int kNumPrograms = 1;
 
-#define ttf1 "Montserrat1"
-#define ttf2 "Liberation Mono1"
+// these were broken on purpose
+#define ttf1 "Montserrat"
+#define ttf2 "Liberation Mono"
 
 enum ELayout
 {
@@ -25,7 +29,7 @@ enum ELayout
 };
 typedef std::function<bool(IMidiMsg*)> mm_cb;
 
-Arpeggio::Arpeggio(IPlugInstanceInfo instanceInfo) 
+Arpeggio::Arpeggio(IPlugInstanceInfo instanceInfo)
   : iplug(instanceInfo, kParamCount, kNumPrograms)
   , mSamplesElapsed(0)
   , arp()
@@ -34,7 +38,7 @@ Arpeggio::Arpeggio(IPlugInstanceInfo instanceInfo)
   , mIsLoaded(0)
   , mLastBlockStart(0)
   , mNoteLength(0)
-  
+
   , textSm_l(11, &COLOR_WHITE, ttf1, IText::kStyleBold,   IText::kAlignNear,   0, IText::kQualityClearType)
   , textSm_c(11, &COLOR_WHITE, ttf1, IText::kStyleBold,   IText::kAlignCenter, 0, IText::kQualityClearType)
   , textSm_r(11, &COLOR_WHITE, ttf1, IText::kStyleBold,   IText::kAlignFar,    0, IText::kQualityClearType)
@@ -73,12 +77,12 @@ void Arpeggio::InitializeParams()
   GetParam(KPARA::kKEY_TRA)->InitBool("key-track", 0);           // fixed amplitude enabled
   GetParam(KPARA::kKEY_AMP)->InitInt("key-amp", 100, 1, 127);    // fixed amplitude value
   GetParam(KPARA::kKEY_GATE)->InitInt("key-gate", 100, 1, 200, "%");   // beats max = 16, divs max = 64
-  
+
 }
 
 void Arpeggio::InitializeControls()
 {
-  IRECT 
+  IRECT
     rect_text, rect_beats, rect_divs, rect_mode, rect_sync, rect_smp, rect_bpm, rect_panic
     , rectButton_00, rectButton_01, rectButton_02, rectButton_03, rectButton_04, rectButton_05
     , rectButton_10, rectButton_11, rectButton_12, rectButton_13, rectButton_14, rectButton_15
@@ -86,6 +90,7 @@ void Arpeggio::InitializeControls()
     , rectButton_A0, rectButton_A1, rectButton_A2, rectButton_A3
     , rectPitchButton, rectKeyTrack, rectKeyAmp, rectGate
     , r3 // matrix push-button width, height
+    , rectGUI
     ;
   const int
     mc1 = 40 // horizontal spacing from matrix button-x to next
@@ -101,6 +106,7 @@ void Arpeggio::InitializeControls()
     , knob_top = 42, trig_top = 50, panic_top = 107
     , octave_x = 270, octave_y = 105, octave_n=8, octave_k = 12
     ;
+  ctl_rect(rectGUI,0, 0, GUI_WIDTH, GUI_HEIGHT);
   ctl_rect(r3, 0, 0, 38, 26);
 
   ctl_rect(rect_beats, knob_beat_x, knob_top, 36, 36); // knob
@@ -112,15 +118,15 @@ void Arpeggio::InitializeControls()
   ctl_rect(rect_bpm, 10, 10, 115, 15);        // should move this.
   ctl_rect(rect_smp, 120, 97, 115, 15);       //  (not used)
 
-  ctl_rect(rect_sync, 12, trig_top, 24, 24);  // 
+  ctl_rect(rect_sync, 12, trig_top, 24, 24);  //
   ctl_rect(rect_panic, 214, 107, 16, 18);     // reset keys to zero
 
   ctl_rect(rectKeyTrack, 5, 74, 38, 26);      // this sucks right now
 
-  ctl_rect(rectPitchButton, 250, 15, 24, 24);
+  ctl_rect(rectPitchButton, 321, 15, 24, 24);
   ctl_rect(rectKeyAmp,      291, 62, 24, 24);
   ctl_rect(rectGate,        321, 62, 24, 24);
-  
+
   ctl_xy(rectButton_00, x101, m_col1, r3); ctl_xy(rectButton_10, x101, m_col2, r3); ctl_xy(rectButton_20, x101, y103, r3); ctl_xy(rectButton_A0, udx0, m_col3, r3);
   ctl_xy(rectButton_01, x102, m_col1, r3); ctl_xy(rectButton_11, x102, m_col2, r3); ctl_xy(rectButton_21, x102, y103, r3); ctl_xy(rectButton_A1, udx1, m_col3, r3);
   ctl_xy(rectButton_02, x103, m_col1, r3); ctl_xy(rectButton_12, x103, m_col2, r3); ctl_xy(rectButton_22, x103, y103, r3); ctl_xy(rectButton_A2, udx0, udy1, r3);
@@ -141,7 +147,7 @@ void Arpeggio::InitializeControls()
     , sharp = pGraphics->LoadIBitmap(RES_IMG_KEYSE_ID, RES_IMG_KEYSE_FN)
     , littleKnob, btnKeyAmp
     ;
-  
+
   BMP_FRAMES_V(pGraphics, generic_knob, RES_KNOB_ID, RES_KNOB_FN, 65);
   BMP_FRAMES_V(pGraphics, btn_sync, RES_BUTTON_ID, RES_BUTTON_FN, 2);
   BMP_FRAMES_V(pGraphics, btn_panic, RES_IMG_PANIC_ID, RES_IMG_PANIC_FN, 2);
@@ -177,7 +183,7 @@ void Arpeggio::InitializeControls()
   // background
 
   generic_bg = pGraphics->LoadIBitmap(RES_BG_ID, RES_BG_FN);
-  AddBitmap(&generic_bg, IRECT(0, 0, GUI_WIDTH, GUI_HEIGHT), 1);
+  AddBitmap(&generic_bg, rectGUI, 1);
 
   // three knobs
 
@@ -188,10 +194,13 @@ void Arpeggio::InitializeControls()
   knobMode->Hide(true); // we're just using this knob to set param values.
 
   knobPitchMod = AddKnobInt003a(&littleKnob, rectPitchButton, kKEY_MOD, &textSm_c, "change pitch");
+  knobPitchMod->SetGearing(9);
   knobGate     = AddKnobInt003a(&littleKnob, rectGate,       kKEY_GATE, &textSm_c, "MIDI Gate");
-  AddKnobInt003a(&littleKnob, rectKeyAmp, kKEY_AMP, &textSm_c, "default key amplitude\nwhen key tracking is off.");
+  knobGate->SetGearing(9);
+  knobAmplitude = AddKnobInt003a(&littleKnob, rectKeyAmp, kKEY_AMP, &textSm_c, "default key amplitude\nwhen key tracking is off.");
   (switchKeyTrack = AddSwitch(&btnKeyAmp, rectKeyTrack, kKEY_TRA))
     ->SetTooltip("Amplutude Key-Tracking");
+  knobAmplitude->SetGearing(9);
 
   int coords[12] = { 0, 4, 6, 10, 12, 18, 22, 24, 28, 30, 34, 36 };
   mKeyboard = new IKeyboardControl(this, octave_x, octave_y, octave_k, octave_n, &regular, &sharp, coords);
@@ -203,10 +212,10 @@ void Arpeggio::InitializeControls()
   textNoteCt = AddTextControl(rect_text, &textSm_c); // display notes
   textBpm    = AddTextTimeControl(rect_bpm, &textSm_l); // display nsamps
   textSmp    = AddTextControl(rect_smp, &textSm_l); // display nsamps
-  
+
 
   // 'transport'
-  
+
   btn_0 = AddButton(&push_A0, rectButton_A0)->Handler(std::bind(&Arpeggio::click_0_1, this), IBitmapButton::handle_down)->setParamInfo(kARP_MODE, 0);
   btn_1 = AddButton(&push_A1, rectButton_A1)->Handler(std::bind(&Arpeggio::click_0_2, this), IBitmapButton::handle_down)->setParamInfo(kARP_MODE, 1);
   btn_2 = AddButton(&push_A2, rectButton_A2)->Handler(std::bind(&Arpeggio::click_0_3, this), IBitmapButton::handle_down)->setParamInfo(kARP_MODE, 2);
@@ -234,7 +243,7 @@ void Arpeggio::InitializeControls()
   AddButton(&push_25, rectButton_25)->Handler(std::bind(&Arpeggio::click_4_1, this), IBitmapButton::handle_down);
 
   AddButton(&btn_panic, rect_panic)->Handler(std::bind(&Arpeggio::click_reset_notes, this), IBitmapButton::handle_down);
-  
+
   AttachGraphics(pGraphics);
 }
 
@@ -262,10 +271,10 @@ void Arpeggio::ProcessDoubleReplacing(double** inputs, double** outputs, int nFr
   // Mutex is already locked for us.
   if (!mIsLoaded) return;
   if (!arp.IsEnabled()) return; // -------------------------------------------------
-  
+
   GetTime(&mTimeInfo);
   arp.ProcessBuffer(cFrame, nFrames, &mTimeInfo);
-  
+
   IMidiQueue *queue = arp.GetMidiQueue();
   while (arp.HasMsg())
   {
@@ -292,7 +301,7 @@ void Arpeggio::Reset()
 void Arpeggio::OnParamChange(int paramIdx)
 {
   IMutexLock lock(this);
-  
+
   switch (paramIdx)
   {
   case kNUM_BEAT: arp.setBeat(GetParam(kNUM_BEAT)->Int()); break;
@@ -302,13 +311,14 @@ void Arpeggio::OnParamChange(int paramIdx)
   case kKEY_MOD:  arp.SetKeyOffset(GetParam(kKEY_MOD)->Int()); break; // NOT IMPLEMENTED
   case kKEY_TRA:  arp.setKeyTrack(GetParam(kKEY_TRA)->Bool() ? 1 : 0); break; // we should probably force sync now, before the break.
   case kKEY_AMP:  arp.setKeyAmp(GetParam(kKEY_AMP)->Int()); break; // we should probably force sync now, before the break.
-  case kKEY_GATE: arp.setKeyGate(GetParam(kKEY_GATE)->Int()); break; // 
+  case kKEY_GATE: arp.setKeyGate(GetParam(kKEY_GATE)->Int()); break; //
   default: break;
   }
 }
 
-inline void Arpeggio::GetMidiTime()
+void Arpeggio::GetMidiTime()
 {
+  IMutexLock lock(this);
   GetTime(&mTimeInfo);
   arp.GetMidiTime(&mTimeInfo, GetSamplePos());
 }
