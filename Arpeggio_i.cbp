@@ -12,7 +12,7 @@
 				<Option object_output="build-win-cb/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option parameters="Arpeggio_i.dll" />
+				<Option parameters="arpeggio_i.dll" />
 				<Option host_application="C:/Program Files/vsthost/vsthost.exe" />
 				<Option run_host_application_in_terminal="0" />
 				<Compiler>
@@ -34,12 +34,11 @@
 				<Option object_output="build-win-cb/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option parameters="Arpeggio_i.dll" />
+				<Option parameters="arpeggio_i.dll" />
 				<Option host_application="C:/Program Files/vsthost/vsthost.exe" />
 				<Option run_host_application_in_terminal="0" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-msse2" />
 					<Add option="-ffast-math" />
 					<Add option="-DVST_API" />
 					<Add option="-DWIN32" />
@@ -77,6 +76,7 @@
 			<Add option="-DVST_FORCE_DEPRECATED" />
 			<Add option="-D_WIN32_IE=0x0900" />
 			<Add option="-DAS_INSTRUMENT" />
+			<Add option="-DUSE_CSTD_FUNCTIONAL" />
 			<Add directory="../../WDL/IPlug" />
 			<Add directory="." />
 			<Add directory="../../VST_SDK/" />
