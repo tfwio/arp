@@ -27,7 +27,10 @@ enum ELayout
   kGainY = 100,
   kKnobFrames = 60
 };
+
+#ifdef USE_CSTD_FUNCTIONAL
 typedef std::function<bool(IMidiMsg*)> mm_cb;
+#endif
 
 Arpeggio::Arpeggio(IPlugInstanceInfo instanceInfo)
   : iplug(instanceInfo, kParamCount, kNumPrograms)
@@ -215,7 +218,7 @@ void Arpeggio::InitializeControls()
 
 
   // 'transport'
-
+  #ifdef USE_CSTD_FUNCTIONAL
   btn_0 = AddButton(&push_A0, rectButton_A0)->Handler(std::bind(&Arpeggio::click_0_1, this), IBitmapButton::handle_down)->setParamInfo(kARP_MODE, 0);
   btn_1 = AddButton(&push_A1, rectButton_A1)->Handler(std::bind(&Arpeggio::click_0_2, this), IBitmapButton::handle_down)->setParamInfo(kARP_MODE, 1);
   btn_2 = AddButton(&push_A2, rectButton_A2)->Handler(std::bind(&Arpeggio::click_0_3, this), IBitmapButton::handle_down)->setParamInfo(kARP_MODE, 2);
@@ -243,7 +246,35 @@ void Arpeggio::InitializeControls()
   AddButton(&push_25, rectButton_25)->Handler(std::bind(&Arpeggio::click_4_1, this), IBitmapButton::handle_down);
 
   AddButton(&btn_panic, rect_panic)->Handler(std::bind(&Arpeggio::click_reset_notes, this), IBitmapButton::handle_down);
+  #else
+  btn_0 = AddButton(&push_A0, rectButton_A0);
+  btn_1 = AddButton(&push_A1, rectButton_A1);
+  btn_2 = AddButton(&push_A2, rectButton_A2);
+  btn_3 = AddButton(&push_A3, rectButton_A3);
 
+  AddButton(&push_00, rectButton_00);
+  AddButton(&push_01, rectButton_01);
+  AddButton(&push_02, rectButton_02);
+  AddButton(&push_03, rectButton_03);
+  AddButton(&push_04, rectButton_04);
+  AddButton(&push_05, rectButton_05);
+
+  AddButton(&push_10, rectButton_10);
+  AddButton(&push_11, rectButton_11);
+  AddButton(&push_12, rectButton_12);
+  AddButton(&push_13, rectButton_13);
+  AddButton(&push_14, rectButton_14);
+  AddButton(&push_15, rectButton_15);
+
+  AddButton(&push_20, rectButton_20);
+  AddButton(&push_21, rectButton_21);
+  AddButton(&push_22, rectButton_22);
+  AddButton(&push_23, rectButton_23);
+  AddButton(&push_24, rectButton_24);
+  AddButton(&push_25, rectButton_25);
+
+  AddButton(&btn_panic, rect_panic);
+  #endif
   AttachGraphics(pGraphics);
 }
 
