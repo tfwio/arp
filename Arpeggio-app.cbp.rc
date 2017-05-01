@@ -1,5 +1,7 @@
 #include "resource.h"
 
+#include <windows.h>
+
 RES_KNOB_ID       PNG RES_KNOB_FN
 RES_BG_ID         PNG RES_BG_FN
 RES_BUTTON_ID     PNG RES_BUTTON_FN
@@ -74,9 +76,8 @@ RES_IMG_TAMP_ID   PNG RES_IMG_TAMP_FN
 
 // end
 
-//#ifdef SA_API
+#ifdef SA_API
 //Standalone stuff
-#include <windows.h>
 
 IDI_ICON1                ICON    DISCARDABLE     "resources\\Arpeggio.ico"
 
@@ -147,4 +148,57 @@ BEGIN
     END
 END
 
-//#endif // SA_API
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+1                  RT_MANIFEST    ".\\manifest.xml"
+
+#endif // SA_API
+
+#define str_dn  "–"
+#define str_tw  "tfwio"
+#define str_bq  "arpeggio"
+#define str_bv  "0.1.0.0"
+#define str_vv  "0.1"
+#define str_dt  "2016-2017"
+#define str_dtf "20170501"
+#ifdef SA_API
+#define str_ext ".exe"
+#else
+#define str_ext ".dll"
+#endif
+#define str_cp "© " str_dt " " str_bq
+#define str_fn str_bq str_ext
+
+//
+// Version Information resources
+//
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+1 VERSIONINFO
+  FILEVERSION     0, 1, 0, 0
+  PRODUCTVERSION  0, 1, 0, 0
+  FILEOS          VOS__WINDOWS32
+  FILETYPE        VFT_APP
+  FILESUBTYPE     VFT2_UNKNOWN
+  FILEFLAGSMASK   0x0000003F
+  FILEFLAGS       0x00000000
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "0409FDE9"
+    BEGIN
+      //VALUE "Comments", "ini-tool-1.0"
+      VALUE "CompanyName",       str_tw
+      VALUE "FileDescription",   str_bq
+      VALUE "FileVersion",       str_bv
+      VALUE "InternalName",      str_bq
+      VALUE "LegalCopyright",    str_cp
+      //VALUE "LegalTrademarks", str_bq
+      VALUE "OriginalFilename",  str_fn
+      VALUE "ProductName",       str_bq
+      VALUE "ProductVersion",    str_bv "-" str_dtf
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0409, 0xFDE9
+  END
+END
