@@ -14,16 +14,14 @@ top:0.75in
 bottom:0.75in
 lr:0.35in -->
 
-> [WIP] a simple arpeggiator vst instrument/effect using iplug/wdl-ol;
-
 ![of 20170421_2251cst](resources/img/20170421_2251cst.png)
 
 its a fairly simple arpeggiator called 'arpeggio' for the moment.  
 guess we'll see where this goes.
 
-it may very well turn out to be my swiss-army knife for midi generation/transformation.
+pre-release binaries for Windows 7 and later [VC2013rt]: [64 bit](https://github.com/tfwio/arp/releases/download/20170422_1623_CST/tfwio_arpeggio_vst-x64-20170422.zip "tfwio_arpeggio_vst-x64-20170422.zip") and [32 bit](https://github.com/tfwio/arp/releases/download/20170422_1623_CST/tfwio_arpeggio_vst-x86-20170422.zip "tfwio_arpeggio_vst-x86-20170422.zip") DAW.
 
-(pre-release)  binaries for Windows 7 and later [VC2013rt]: [64 bit](https://github.com/tfwio/arp/releases/download/20170422_1623_CST/tfwio_arpeggio_vst-x64-20170422.zip "tfwio_arpeggio_vst-x64-20170422.zip") and [32 bit](https://github.com/tfwio/arp/releases/download/20170422_1623_CST/tfwio_arpeggio_vst-x86-20170422.zip "tfwio_arpeggio_vst-x86-20170422.zip") DAW.
+<!-- The binaries are just the first working commit ATM. Compiling from source should yield better looking and/or better product. -->
 
 See the [releases](https://github.com/tfwio/arp/releases) page.
 
@@ -42,7 +40,7 @@ The bug is where/in when you right-click, the last key stuck down gets un-stuck&
 "**K-AMP**" on/off switch/button toggles enabling a amplitude knob which forces midi messages to the particular amp or otherwise relies on what you press in your midi keyboard (or in the tiny UI keys---the lower the louder)
 
 **GATE** &mdash; knob percentage from 1 to 200, generally for shrinking down the length of a generated note.  
-CAUTION: Generated NOTE_ON/NOTE_OFF combonation will interfere when the same key gets repeated.  This is an acceptable quirk as long as you're aware.
+CAUTION: Generated NOTE_ON/NOTE_OFF combination will interfere when the same key gets repeated.  This is an acceptable quirk as long as you're aware.
 Like the KEY_PITCH knob/feature, this is one of the last things added could use some work on predicting note-on/off-overlaps.
 
 **TIMING**: BEATS (1-16) VS DIVS (1-64) knobs for controlling as well as...  
@@ -57,13 +55,15 @@ Like the KEY_PITCH knob/feature, this is one of the last things added could use 
 
 ----
 
+This is generally for playing on your piano.  There isn't any latency/compensation (like "MIDI Strum" for example) which in a nut-shell translates to that when in a DAW's piano-roll mode, the first trigger (multiple notes all hit at exactly the same 0-delta timing) might sequence out of order... So start-up notes would have to be ordered like you would when playing on a piano to ensure the notes are in sequence.  If this changes, this note will too ;)
+
+----
+
 If you're not sure how to use a MIDI effect in live, it has to be VSTi.  (See [this img](manual/live.gif))  
 Most DAW explain how they support MIDI effects if they do.  
 Ardour, Cubase, and REAPER among a few other DAW I'm aware of properly support MIDI VST effects (not compiled as instrument) chains properly.
 
-
-
-# WHAT IS AN ARPEGGIATOR?
+# ARPEGGIATOR IS
 
 [Secrets of the Arpeggiator](http://archive.oreilly.com/pub/a/oreilly/digitalmedia/2006/06/29/secrets-of-the-arpeggiator.html) — by Jim Atkin of O'Reilly Digital-Media (20060629).  
 Wikipedia — [Arpeggio](https://en.wikipedia.org/wiki/Arpeggio)
@@ -82,7 +82,6 @@ The following table is what has it my radar.  There are more.
 
 - \**Kirnu demo doesn't allow you to store presets but works fine otherwise (I'm told)*
 - \**NoraCM is distributed with Computer Music magazine (including digital editions).*
-
 
 
 ## CLOCK/TIMING
@@ -109,17 +108,20 @@ inline int32 calculate()
 
 - wdl-ol/iplug
 - see github.com/tfwio/twix
-    - common includes and few cpp dependencies are in there.
+    - common includes and few cpp dependencies are in there (such as a patch)
     - wihtout the notes on the readme there this would be fairly difficult to compile.
-- using VisualStudio 2013 Express load the SLN (**Arpeggio.sln**)
-    - **arpeggio_i-vst2.vcproj** some DAW that can't handle VST-midi-effect specs so there's an instrument version.
-    - **arpeggio-vst2.vcproj** is the effect version that works in DAWs properly supporting VST midi effects.
+- compilation options
+    1. using VisualStudio 2013 Express load the SLN (**Arpeggio.sln**)
+    2. using VisualStudio 2015 Community load the SLN (**Arpeggio-vc2015_c-r3.sln**)
+    3. there are also **CodeBlocks** projects for the vst, vsti and app...
+        - using **msys2+gcc+boost** for its boost's filesystem templates so I woudn't use this unless you're familiar configuring/using **mingw64-builds+boost-libs/headers** or **msys2+gcc+boost**.
+        - reason: filesystem templates act differently in boost, vc2013e and vc2015c-r3, and I haven't yet checked out mingw64-builds latest—let alone the `<filesystem>` supported templates.
+
+Feel free to 'comment' any issues or questions on the comment sections of the github-commit pages.
 
 ## NON-WINDOWS (noop)
 
-It would be nice to see this working on a mac but I'm probably not going to be getting to that, though I'd like to write up some makefiles for mingw/msys2.
-If you would like to get it working in something other than windows, you're going to have to reference the vcproj's until that imaginary day makefiles or some other reference comes into existance.
-Also (again), we're going to need to parallel and clean up a couple of things like a few mouse-related API (that aren't implemented yet here in a particular number-control), the timer mechanism noted in the 'twix' readme and perhaps some other things that are hard-wired to windows if I missed something I didn't document —there really shouldn't be any real difficulty I'm thinking, once all the right files, paths and preprocessor definitions are in place.
+Theoretically, it would be possible yet even easy but we need a few hacks into IGraphics to get the global timer (if its similarly implemented in windows) to trigger a call to `void IGraphics::OnTimer` and possibly implement some mouse-cursor native API for a particular text-control that'll end up being used in here.  Otherwise you can simply disable the `OnTimer` updates all-together and move what is (currently) only text-updates to the audio-thread.  I would prefer this to be an animation example not running off of the audio-thread in due time—even if I do have to buy an old duo-book-pro.
 
 
 # TODO
