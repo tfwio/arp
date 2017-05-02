@@ -27,7 +27,10 @@ body {
 <ul>
 <li><a href="#arpeggiator-is">ARPEGGIATOR IS</a><ul>
 <li><a href="#clocktiming">CLOCK/TIMING</a></li>
-<li><a href="#windows-dev">WINDOWS DEV</a></li>
+<li><a href="#windows-dev">WINDOWS DEV</a><ul>
+<li><a href="#visual-studio-20132015">Visual Studio 2013+2015</a></li>
+<li><a href="#codeblocks-notes">CodeBlocks notes</a></li>
+</ul></li>
 <li><a href="#non-windows-noop">NON-WINDOWS (noop)</a></li>
 </ul></li>
 <li><a href="#todo">TODO</a></li>
@@ -38,7 +41,7 @@ body {
 <img src="resources/img/20170421_2251cst.png" alt="of 20170421_2251cst" /><figcaption>of 20170421_2251cst</figcaption>
 </figure>
 <p>its a fairly simple arpeggiator called ‘arpeggio’ for the moment.<br />guess we’ll see where this goes.</p>
-<p>pre-release binaries for Windows 7 and later [VC2013rt]: <a href="https://github.com/tfwio/arp/releases/download/20170422_1623_CST/tfwio_arpeggio_vst-x64-20170422.zip" title="tfwio_arpeggio_vst-x64-20170422.zip">64 bit</a> and <a href="https://github.com/tfwio/arp/releases/download/20170422_1623_CST/tfwio_arpeggio_vst-x86-20170422.zip" title="tfwio_arpeggio_vst-x86-20170422.zip">32 bit</a> DAW.</p>
+<p>pre-release binaries for Windows XP and later [VC2013rt]: <a href="https://github.com/tfwio/arp/releases/download/20170501-r2/tfwio_arpeggio_vst-20170501-x86_and_x64.7z" title="tfwio_arpeggio_vst-20170501-x86_and_x64.7z">64+32 bit</a>.<br />There are just the dlls in the 7z archive (no readme er nuttin).</p>
 <!-- The binaries are just the first working commit ATM. Compiling from source should yield better looking and/or better product. -->
 <p>See the <a href="https://github.com/tfwio/arp/releases">releases</a> page.</p>
 <hr />
@@ -120,9 +123,16 @@ body {
   <span class="kw">return</span> mNoteDurationOn;
 }</code></pre>
 <h2 id="windows-dev">WINDOWS DEV</h2>
+<p>REQUISITES</p>
 <ul>
-<li>wdl-ol/iplug</li>
-<li>see github.com/tfwio/twix
+<li>github.com/olilarkin/wdl-ol (you know)</li>
+<li>github.com/tfwio/twix is a small include (extensions) library containing a few abstractions (IControls) and patches over IPLUG.</li>
+<li>compiles in Visual Studio 2013 Express and 2015 Community</li>
+<li>compiles in Codeblocks configured to msys2+GCC+boost</li>
+</ul>
+<h3 id="visual-studio-20132015">Visual Studio 2013+2015</h3>
+<ul>
+<li>wdl-ol/iplug
 <ul>
 <li>common includes and few cpp dependencies are in there (such as a patch)</li>
 <li>wihtout the notes on the readme there this would be fairly difficult to compile.</li>
@@ -131,16 +141,51 @@ body {
 <ol>
 <li>using VisualStudio 2013 Express load the SLN (<strong>Arpeggio.sln</strong>)</li>
 <li>using VisualStudio 2015 Community load the SLN (<strong>Arpeggio-vc2015_c-r3.sln</strong>)</li>
-<li>there are also <strong>CodeBlocks</strong> projects for the vst, vsti and app…
-<ul>
-<li>using <strong>msys2+gcc+boost</strong> for its boost’s filesystem templates so I woudn’t use this unless you’re familiar configuring/using <strong>mingw64-builds+boost-libs/headers</strong> or <strong>msys2+gcc+boost</strong>.</li>
-<li>reason: filesystem templates act differently in boost, vc2013e and vc2015c-r3, and I haven’t yet checked out mingw64-builds latest—let alone the <code>&lt;filesystem&gt;</code> supported templates.</li>
-</ul></li>
 </ol></li>
+</ul>
+<h3 id="codeblocks-notes">CodeBlocks notes</h3>
+<p>using BOOST filesystem lib and msys64-mingw32/GCC-6.3 at the moment</p>
+<p>I named the compiler configuarion <code>GCC msys64/mingw64</code> so when creating your 64-bit compiler configuration for using the codeblocks projects, using that will prevent a few more project-config steps.<br /><em>eventually there’ll’ be slate-template project… and these notes will move to the twix project-space…</em></p>
+<ul>
+<li>targeting x64
+<ul>
+<li>in stead of using compiler flag <code>-fpermissive</code> globally, we’re applying this only to the cpp files that need it.
+<ul>
+<li><code>WDL/IPlug/IPlugGraphicsWin.cpp</code></li>
+<li><code>[your-plugmain-including-IPlug_include_in_plug_src.h].cpp</code>
+<ul>
+<li><strong>This is significant to x64 host-compatibility</strong>. I’m using <code>__declspec(dllexport) void* VSTPluginMain(audioMasterCallback hostCallback)</code> because it works in all the VstHosts I’ve tested as opposed to <code>#define EXPORT __attribute__ ((visibility(&quot;default&quot;)))</code>—er whatever.</li>
+</ul></li>
+<li>Local <code>*.cbp</code>’s have these settings but if you try compiling targeting x64, we need to apply the <code>-fpermissive</code> flag to a couple file properties.<br /> Right-Click the file and select the compiler targeting x64, check the checkbox and type into the textbox:<br /> <code>$compiler $options $includes -c $file -o $object -fpermissive</code>.</li>
+</ul></li>
+</ul></li>
+<li>targeting x64 abd x86 we want to apply the same config setting to <code>IGraphicsWin.cpp</code>.<br /> <code>$compiler $options $includes -c $file -o $object -fpermissive</code></li>
+<li>x86 include search directories (example)
+<ul>
+<li><code>C:\msys64\mingw32\include</code></li>
+<li><code>C:\msys64\mingw32\i686-w64-mingw32\include</code></li>
+<li><code>C:\msys64\mingw32\include\c++\6.3.0</code></li>
+</ul></li>
+<li>x86 linker search directories (example)
+<ul>
+<li><code>C:\msys64\mingw32\lib</code></li>
+<li><code>C:\msys64\mingw32\i686-w64-mingw32\lib</code></li>
+</ul></li>
+<li>x64 include search directories (example)
+<ul>
+<li><code>C:\msys64\mingw64\include</code></li>
+<li><code>C:\msys64\mingw64\x86_64-w64-mingw32\include</code></li>
+<li><code>C:\msys64\mingw64\include\c++\6.3.0</code></li>
+</ul></li>
+<li>x64 linker search directories (example)
+<ul>
+<li><code>C:\msys64\mingw64\lib</code></li>
+<li><code>C:\msys64\mingw64\x86_64-w64-mingw32\lib</code></li>
+</ul></li>
 </ul>
 <p>Feel free to ‘comment’ any issues or questions on the comment sections of the github-commit pages.</p>
 <h2 id="non-windows-noop">NON-WINDOWS (noop)</h2>
-<p>Theoretically, it would be possible yet even easy but we need a few hacks into IGraphics to get the global timer (if its similarly implemented in windows) to trigger a call to <code>void IGraphics::OnTimer</code> and possibly implement some mouse-cursor native API for a particular text-control that’ll end up being used in here. Otherwise you can simply disable the <code>OnTimer</code> updates all-together and move what is (currently) only text-updates to the audio-thread. I would prefer this to be an animation example not running off of the audio-thread in due time—even if I do have to buy an old duo-book-pro.</p>
+<p>Theoretically it be possible yet even easy but we need a few hacks into IGraphics to get the global timer (if its similarly implemented in windows) to trigger a call to <code>void IGraphics::OnTimer</code> and possibly implement some mouse-cursor native API for a particular text-control that’ll end up being used in here. Otherwise you can simply disable the <code>OnTimer</code> updates all-together and move what is (currently) only text-updates to the audio-thread. I would prefer this to be an animation example not running off of the audio-thread in due time—even if I do have to buy an old duo-book-pro.</p>
 <h1 id="todo">TODO</h1>
 <ul>
 <li>few more ramp modes</li>
@@ -166,7 +211,19 @@ body {
 <li>what else?</li>
 </ul>
 <h1 id="license">license</h1>
-<p>MIT and/or whatever GPL — future revisions may alter</p>
+<pre><code>© tfw 2016-2017
+disclaims any to all liability</code></pre>
+<ul>
+<li><strong><a href="http://www.cockos.com/wdl/">cockos/wdl</a></strong></li>
+<li><strong><a href="http://www.nullsoft.com/free/jnetlib">JNetLib</a></strong></li>
+<li><strong><a href="http://www.libpng.org/pub/png">LibPNG</a></strong></li>
+<li><strong><a href="https://sourceforge.net/projects/giflib/">GifLib</a></strong></li>
+<li><strong><a href="http://www.ijg.org/">JPEGLib</a></strong></li>
+<li><strong><a href="http://www.zlib.net">zlib</a></strong></li>
+<li><strong><a href="http://www.taletn.com/wdl/">taletn/wdl</a></strong>, <a href="https://github.com/TaleTN/WDL">github</a></li>
+<li><strong><a href="https://github.com/olilarkin/wdl-ol">olilarkin/wdl-ol</a></strong></li>
+</ul>
+<p>all rights reserved</p>
 <!--https://vignette4.wikia.nocookie.net/looneytunes/images/b/b1/Daffypearl.gif/revision/latest?cb=20060212075938-->
 <figure>
 <img src="manual/license.jpg" />

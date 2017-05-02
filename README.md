@@ -19,7 +19,8 @@ lr:0.35in -->
 its a fairly simple arpeggiator called 'arpeggio' for the moment.  
 guess we'll see where this goes.
 
-pre-release binaries for Windows 7 and later [VC2013rt]: [64 bit](https://github.com/tfwio/arp/releases/download/20170422_1623_CST/tfwio_arpeggio_vst-x64-20170422.zip "tfwio_arpeggio_vst-x64-20170422.zip") and [32 bit](https://github.com/tfwio/arp/releases/download/20170422_1623_CST/tfwio_arpeggio_vst-x86-20170422.zip "tfwio_arpeggio_vst-x86-20170422.zip") DAW.
+pre-release binaries for Windows XP and later [VC2013rt]: [64+32 bit](https://github.com/tfwio/arp/releases/download/20170501-r2/tfwio_arpeggio_vst-20170501-x86_and_x64.7z "tfwio_arpeggio_vst-20170501-x86_and_x64.7z").  
+There are just the dlls in the 7z archive (no readme er nuttin).
 
 <!-- The binaries are just the first working commit ATM. Compiling from source should yield better looking and/or better product. -->
 
@@ -106,22 +107,59 @@ inline int32 calculate()
 
 ## WINDOWS DEV
 
+REQUISITES
+
+- github.com/olilarkin/wdl-ol (you know)
+- github.com/tfwio/twix is a small include (extensions) library containing a few abstractions (IControls) and patches over IPLUG.
+- compiles in Visual Studio 2013 Express and 2015 Community
+- compiles in Codeblocks configured to msys2+GCC+boost
+
+### Visual Studio 2013+2015
+
 - wdl-ol/iplug
-- see github.com/tfwio/twix
     - common includes and few cpp dependencies are in there (such as a patch)
     - wihtout the notes on the readme there this would be fairly difficult to compile.
 - compilation options
     1. using VisualStudio 2013 Express load the SLN (**Arpeggio.sln**)
     2. using VisualStudio 2015 Community load the SLN (**Arpeggio-vc2015_c-r3.sln**)
-    3. there are also **CodeBlocks** projects for the vst, vsti and app...
-        - using **msys2+gcc+boost** for its boost's filesystem templates so I woudn't use this unless you're familiar configuring/using **mingw64-builds+boost-libs/headers** or **msys2+gcc+boost**.
-        - reason: filesystem templates act differently in boost, vc2013e and vc2015c-r3, and I haven't yet checked out mingw64-builds latest—let alone the `<filesystem>` supported templates.
+
+### CodeBlocks notes
+
+using BOOST filesystem lib and msys64-mingw32/GCC-6.3 at the moment
+
+I named the compiler configuarion `GCC msys64/mingw64` so when creating your 64-bit compiler configuration for using the codeblocks projects, using that will prevent a few more project-config steps.  
+*eventually there'll' be slate-template project… and these notes will move to the twix project-space…*
+
+- targeting x64
+    - in stead of using compiler flag `-fpermissive` globally, we're applying this only to the cpp files that need it.
+        - `WDL/IPlug/IPlugGraphicsWin.cpp`
+        - `[your-plugmain-including-IPlug_include_in_plug_src.h].cpp`
+            - **This is significant to x64 host-compatibility**.  I'm using `__declspec(dllexport) void* VSTPluginMain(audioMasterCallback hostCallback)` because it works in all the VstHosts I've tested as opposed to `#define EXPORT __attribute__ ((visibility("default")))`—er whatever.
+        - Local `*.cbp`'s have these settings but if you try compiling targeting x64, we need to apply the `-fpermissive` flag to a couple file properties.  
+          Right-Click the file and select the compiler targeting x64, check the checkbox and type into the textbox:  
+          `$compiler $options $includes -c $file -o $object -fpermissive`.
+- targeting x64 abd x86 we want to apply the same config setting to `IGraphicsWin.cpp`.  
+  `$compiler $options $includes -c $file -o $object -fpermissive`
+- x86 include search directories (example)
+    - `C:\msys64\mingw32\include`
+    - `C:\msys64\mingw32\i686-w64-mingw32\include`
+    - `C:\msys64\mingw32\include\c++\6.3.0`
+- x86 linker search directories (example)
+    - `C:\msys64\mingw32\lib`
+    - `C:\msys64\mingw32\i686-w64-mingw32\lib`
+- x64 include search directories (example)
+    - `C:\msys64\mingw64\include`
+    - `C:\msys64\mingw64\x86_64-w64-mingw32\include`
+    - `C:\msys64\mingw64\include\c++\6.3.0`
+- x64 linker search directories (example)
+    - `C:\msys64\mingw64\lib`
+    - `C:\msys64\mingw64\x86_64-w64-mingw32\lib`
 
 Feel free to 'comment' any issues or questions on the comment sections of the github-commit pages.
 
 ## NON-WINDOWS (noop)
 
-Theoretically, it would be possible yet even easy but we need a few hacks into IGraphics to get the global timer (if its similarly implemented in windows) to trigger a call to `void IGraphics::OnTimer` and possibly implement some mouse-cursor native API for a particular text-control that'll end up being used in here.  Otherwise you can simply disable the `OnTimer` updates all-together and move what is (currently) only text-updates to the audio-thread.  I would prefer this to be an animation example not running off of the audio-thread in due time—even if I do have to buy an old duo-book-pro.
+Theoretically it be possible yet even easy but we need a few hacks into IGraphics to get the global timer (if its similarly implemented in windows) to trigger a call to `void IGraphics::OnTimer` and possibly implement some mouse-cursor native API for a particular text-control that'll end up being used in here.  Otherwise you can simply disable the `OnTimer` updates all-together and move what is (currently) only text-updates to the audio-thread.  I would prefer this to be an animation example not running off of the audio-thread in due time—even if I do have to buy an old duo-book-pro.
 
 
 # TODO
@@ -144,7 +182,20 @@ Theoretically, it would be possible yet even easy but we need a few hacks into I
 
 # license
 
-MIT and/or whatever GPL &mdash; future revisions may alter
+    © tfw 2016-2017
+    disclaims any to all liability
+
+
+- **[cockos/wdl](http://www.cockos.com/wdl/)**
+- **[JNetLib](http://www.nullsoft.com/free/jnetlib)**
+- **[LibPNG](http://www.libpng.org/pub/png)**
+- **[GifLib](https://sourceforge.net/projects/giflib/)**
+- **[JPEGLib](http://www.ijg.org/)**
+- **[zlib](http://www.zlib.net)**
+- **[taletn/wdl](http://www.taletn.com/wdl/)**, [github](https://github.com/TaleTN/WDL)
+- **[olilarkin/wdl-ol](https://github.com/olilarkin/wdl-ol)**
+
+all rights reserved
 
 <!--https://vignette4.wikia.nocookie.net/looneytunes/images/b/b1/Daffypearl.gif/revision/latest?cb=20060212075938-->
 

@@ -282,7 +282,9 @@
 		</Unit>
 		<Unit filename="../../WDL/zlib/zutil.h" />
 		<Unit filename="../../twix/source/ICControls.cpp" />
-		<Unit filename="Arpeggio.cpp" />
+		<Unit filename="Arpeggio.cpp">
+			<Option compiler="gcc_msys64mingw64" use="1" buildCommand="$compiler $options $includes -c $file -o $object -fpermissive" />
+		</Unit>
 		<Unit filename="Arpeggio.h" />
 		<Unit filename="Arpeggio.rc">
 			<Option compilerVar="WINDRES" />
