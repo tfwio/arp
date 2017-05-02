@@ -113,7 +113,7 @@ END
 
 #endif // SA_API
 
-#define str_dn  "â€“"
+#define str_dn  "–"
 #define str_tw  "tfwio"
 #define str_bq  "arpeggio"
 #define str_bv  "0.1.0.0"
@@ -125,7 +125,7 @@ END
 #else
 #define str_ext ".dll"
 #endif
-#define str_cp "Â© " str_dt " " str_bq
+#define str_cp "© " str_dt " " str_bq
 #define str_fn str_bq str_ext
 
 //
