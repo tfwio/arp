@@ -107,8 +107,6 @@ inline int32 calculate()
 
 ## WINDOWS DEV
 
-REQUISITES
-
 - github.com/olilarkin/wdl-ol (you know)
 - github.com/tfwio/twix is a small include (extensions) library containing a few abstractions (IControls) and patches over IPLUG.
 - compiles in Visual Studio 2013 Express and 2015 Community
