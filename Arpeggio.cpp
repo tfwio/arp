@@ -4,7 +4,7 @@
 #endif
 
 #include "Arpeggio.h"
-#include "IPlug_include_in_plug_src.h"
+#include "IPlug_inc_cpp.h"
 #ifndef _ICONTROL_
 #include "IControl.h"
 #endif

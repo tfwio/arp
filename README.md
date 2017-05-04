@@ -128,16 +128,6 @@ using BOOST filesystem lib and msys64-mingw32/GCC-6.3 at the moment
 I named the compiler configuarion `GCC msys64/mingw64` so when creating your 64-bit compiler configuration for using the codeblocks projects, using that will prevent a few more project-config steps.  
 *eventually there'll' be slate-template project… and these notes will move to the twix project-space…*
 
-- targeting x64
-    - in stead of using compiler flag `-fpermissive` globally, we're applying this only to the cpp files that need it.
-        - `WDL/IPlug/IPlugGraphicsWin.cpp`
-        - `[your-plugmain-including-IPlug_include_in_plug_src.h].cpp`
-            - **This is significant to x64 host-compatibility**.  I'm using `__declspec(dllexport) void* VSTPluginMain(audioMasterCallback hostCallback)` because it works in all the VstHosts I've tested as opposed to `#define EXPORT __attribute__ ((visibility("default")))`—er whatever.
-        - Local `*.cbp`'s have these settings but if you try compiling targeting x64, we need to apply the `-fpermissive` flag to a couple file properties.  
-          Right-Click the file and select the compiler targeting x64, check the checkbox and type into the textbox:  
-          `$compiler $options $includes -c $file -o $object -fpermissive`.
-- targeting x64 abd x86 we want to apply the same config setting to `IGraphicsWin.cpp`.  
-  `$compiler $options $includes -c $file -o $object -fpermissive`
 - x86 include search directories (example)
     - `C:\msys64\mingw32\include`
     - `C:\msys64\mingw32\i686-w64-mingw32\include`
@@ -152,6 +142,13 @@ I named the compiler configuarion `GCC msys64/mingw64` so when creating your 64-
 - x64 linker search directories (example)
     - `C:\msys64\mingw64\lib`
     - `C:\msys64\mingw64\x86_64-w64-mingw32\lib`
+- targeting x64 abd x86 we want to apply the same config setting to `IGraphicsWin.cpp`.  
+  `$compiler $options $includes -c $file -o $object -fpermissive`
+- targeting x64
+    - in stead of using compiler flag `-fpermissive` globally, we're applying this only to the cpp files that need it.
+        - `WDL/IPlug/IPlugGraphicsWin.cpp` and whatever CPP has `int main` and `VstPluginMain` (in this case: `arpeggio.cpp`) have these settings however targeting x64, we need to apply the `-fpermissive` flag if you re-define a differently named GCC compiler in your CodeBlocks preferences (hence the project files).    
+        Right-Click the file and select the compiler targeting x64 (combobox), check the checkbox and type into the textbox:  
+        `$compiler $options $includes -c $file -o $object -fpermissive`.
 
 Feel free to 'comment' any issues or questions on the comment sections of the github-commit pages.
 

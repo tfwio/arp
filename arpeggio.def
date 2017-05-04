@@ -1,0 +1,4 @@
+LIBRARY arpeggio
+EXPORTS
+VSTPluginMain 
+main=VSTPluginMain
