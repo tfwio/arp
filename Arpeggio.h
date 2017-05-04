@@ -44,41 +44,15 @@ public:
   int32 someCounter = 0; // this is just a number of frames elapsed
   using cstr = std::string;
 
-  inline cstr tostr(int input) { return std::to_string(input); }
-  inline cstr tostr(double input) { return std::to_string(input); }
-  inline cstr tostr(float input) { return std::to_string(input); }
+  cstr tostr(int input) { return std::to_string(input); }
+  cstr tostr(double input) { return std::to_string(input); }
+  cstr tostr(float input) { return std::to_string(input); }
 
-  inline double SecondsElapsed(double frameCt, double fs=44100.) { return frameCt / fs; }
-  inline double SecondsElapsedM(double frameCt, double fs = 44100.) { return fmod(SecondsElapsed(frameCt, fs), 60); }
-  inline double SecondsElapsedMF(double frameCt, double fs = 44100.) { return floor(SecondsElapsedM(frameCt, fs)); }
+  double SecondsElapsed(double frameCt, double fs=44100.) { return frameCt / fs; }
+  double SecondsElapsedM(double frameCt, double fs = 44100.) { return fmod(SecondsElapsed(frameCt, fs), 60); }
+  double SecondsElapsedMF(double frameCt, double fs = 44100.) { return floor(SecondsElapsedM(frameCt, fs)); }
 
-  void OnTimer() override
-  {
-    // (*) we could use this timer to check samples elapsed against a CPU time-check in this timer-frame.
-    if (!mIsLoaded) return;
-
-    IPlugBase::OnTimer();
-    someCounter++; // we should check if its >= 44100 and possible increment another counter.
-    someCounter = someCounter % 44100;
-
-    GetMidiTime();
-    //arp.setRate(mFs);
-    if (!mTimeInfo.mTransportIsRunning) {
-      cstr str = "rpos: " + tostr(int(SecondsElapsedMF(mSamplesElapsed))) + "\ninc: " + tostr(someCounter) + "\nt: " + tostr(mTimeInfo.mTempo);
-      WDL_String text = WDL_String(str.c_str());
-      textBpm->SetTextFromPlug(text.Get());
-    }
-    else if (mTimeInfo.mTransportLoopEnabled) { // transport is running and looping
-      cstr str = "spos1: " + tostr(int(mTimeInfo.mSamplePos)) + "\ninc: " + tostr(someCounter) + "\nt: " + tostr(mTimeInfo.mTempo);
-      WDL_String text = WDL_String(str.c_str());
-      textBpm->SetTextFromPlug(text.Get());
-    }
-    else/* if (time.mTransportIsRunning)*/ { // transport is running not looped
-      cstr str = "spos2: " + tostr(int(mTimeInfo.mSamplePos)) + "\ninc: " + tostr(someCounter) + "\nt: " + tostr(mTimeInfo.mTempo);
-      WDL_String text = WDL_String(str.c_str());
-      textBpm->SetTextFromPlug(text.Get());
-    }
-  }
+  void OnTimer() override;
 
   // provide public access
   bool SendMidi(IMidiMsg *pMsg);
@@ -86,7 +60,7 @@ public:
 private:
   /**
   mBeatLength is set to arp.getNoteDuration() after arp.setMulti(...) */
-  inline void GetMidiTime();
+  void GetMidiTime();
 
 protected:
 
@@ -129,5 +103,32 @@ private:
   ISwitchControl   *switchType, *switchKeyTrack;
   IContactControl  *contactResetNotes;
 };
+void Arpeggio::OnTimer()
+{
+  // (*) we could use this timer to check samples elapsed against a CPU time-check in this timer-frame.
+  if (!mIsLoaded) return;
+
+  IPlugBase::OnTimer();
+  someCounter++; // we should check if its >= 44100 and possible increment another counter.
+  someCounter = someCounter % 44100;
+
+  GetMidiTime();
+  //arp.setRate(mFs);
+  if (!mTimeInfo.mTransportIsRunning) {
+    cstr str = "rpos: " + tostr(int(SecondsElapsedMF(mSamplesElapsed))) + "\ninc: " + tostr(someCounter) + "\nt: " + tostr(mTimeInfo.mTempo);
+    WDL_String text = WDL_String(str.c_str());
+    textBpm->SetTextFromPlug(text.Get());
+  }
+  else if (mTimeInfo.mTransportLoopEnabled) { // transport is running and looping
+    cstr str = "spos1: " + tostr(int(mTimeInfo.mSamplePos)) + "\ninc: " + tostr(someCounter) + "\nt: " + tostr(mTimeInfo.mTempo);
+    WDL_String text = WDL_String(str.c_str());
+    textBpm->SetTextFromPlug(text.Get());
+  }
+  else/* if (time.mTransportIsRunning)*/ { // transport is running not looped
+    cstr str = "spos2: " + tostr(int(mTimeInfo.mSamplePos)) + "\ninc: " + tostr(someCounter) + "\nt: " + tostr(mTimeInfo.mTempo);
+    WDL_String text = WDL_String(str.c_str());
+    textBpm->SetTextFromPlug(text.Get());
+  }
+}
 
 #endif
