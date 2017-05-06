@@ -14,7 +14,6 @@
 
 const int kNumPrograms = 1;
 
-// these were broken on purpose
 #define ttf1 "Montserrat"
 #define ttf2 "Liberation Mono"
 
@@ -360,6 +359,33 @@ inline int  Arpeggio::GetNumKeys() { return arp.KeyCount(); }
 inline bool Arpeggio::GetKeyStatus(int note){ return arp.KeyStatus(note); }
 inline bool Arpeggio::RemoveKey(int note){ return arp.KeyRemove(note); }
 
+void Arpeggio::OnTimer()
+{
+  // (*) we could use this timer to check samples elapsed against a CPU time-check in this timer-frame.
+  if (!mIsLoaded) return;
+
+  IPlugBase::OnTimer();
+  someCounter++; // we should check if its >= 44100 and possible increment another counter.
+  someCounter = someCounter % 44100;
+
+  GetMidiTime();
+  //arp.setRate(mFs);
+  if (!mTimeInfo.mTransportIsRunning) {
+    cstr str = "rpos: " + tostr(int(SecondsElapsedMF(mSamplesElapsed))) + "\ninc: " + tostr(someCounter) + "\nt: " + tostr(mTimeInfo.mTempo);
+    WDL_String text = WDL_String(str.c_str());
+    textBpm->SetTextFromPlug(text.Get());
+  }
+  else if (mTimeInfo.mTransportLoopEnabled) { // transport is running and looping
+    cstr str = "spos1: " + tostr(int(mTimeInfo.mSamplePos)) + "\ninc: " + tostr(someCounter) + "\nt: " + tostr(mTimeInfo.mTempo);
+    WDL_String text = WDL_String(str.c_str());
+    textBpm->SetTextFromPlug(text.Get());
+  }
+  else/* if (time.mTransportIsRunning)*/ { // transport is running not looped
+    cstr str = "spos2: " + tostr(int(mTimeInfo.mSamplePos)) + "\ninc: " + tostr(someCounter) + "\nt: " + tostr(mTimeInfo.mTempo);
+    WDL_String text = WDL_String(str.c_str());
+    textBpm->SetTextFromPlug(text.Get());
+  }
+}
 // callback methods
 
 inline void Arpeggio::SetMe(int nn, int dn)
