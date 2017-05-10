@@ -50,6 +50,9 @@
 					<Add option="-DDLL_BUILD" />
 					<Add option="-DNDEBUG" />
 				</Compiler>
+				<ExtraCommands>
+					<Add after='cmd /c copy /y &quot;$(TARGET_OUTPUT_FILE)&quot; &quot;c:\program files (x86)\common files\vst2&quot;' />
+				</ExtraCommands>
 			</Target>
 			<Target title="Tracer Win32">
 				<Option output="build-win-cb/arpeggio_i" prefix_auto="1" extension_auto="1" />
@@ -98,6 +101,10 @@
 					<Add option="-s" />
 					<Add option="-m64" />
 				</Linker>
+				<ExtraCommands>
+					<Add after='cmd /c copy /y &quot;$(TARGET_OUTPUT_FILE)&quot; &quot;c:\program files\common files\vst2&quot;' />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<Compiler>
