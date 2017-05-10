@@ -7,7 +7,7 @@
     <ClCompile Include="Arpeggio.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\twix\source\ICControls.cpp">
+    <ClCompile Include="..\..\twix\ICControls.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

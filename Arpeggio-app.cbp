@@ -108,7 +108,7 @@
 			<Add directory="../../WDL" />
 			<Add directory="../../WDL/rtaudiomidi" />
 			<Add directory="../../ASIO_SDK" />
-			<Add directory="../../twix/include" />
+			<Add directory="../../twix" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="./" />
@@ -298,7 +298,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../WDL/zlib/zutil.h" />
-		<Unit filename="../../twix/source/ICControls.cpp" />
+		<Unit filename="../../twix/ICControls.cpp" />
 		<Unit filename="Arpeggio-app.cbp.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

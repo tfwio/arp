@@ -256,7 +256,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\twix\source\ICControls.cpp" />
+    <ClCompile Include="..\..\twix\ICControls.cpp" />
     <ClCompile Include="..\..\WDL\IPlug\IPlugVST.cpp" />
     <ClCompile Include="Arpeggio.cpp" />
   </ItemGroup>

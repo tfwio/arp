@@ -59,52 +59,52 @@
     <ClInclude Include="..\..\WDL\IPlug\IPlugStandalone.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\IBitmapButton.h">
+    <ClInclude Include="..\..\twix\IBitmapButton.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\ICControl.h">
+    <ClInclude Include="..\..\twix\ICControl.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\ICControls.h">
+    <ClInclude Include="..\..\twix\ICControls.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\IChannelStateManager.h">
+    <ClInclude Include="..\..\twix\IChannelStateManager.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\IColDetail.h">
+    <ClInclude Include="..\..\twix\IColDetail.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\IColNumber.h">
+    <ClInclude Include="..\..\twix\IColNumber.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\ICPanelControl.h">
+    <ClInclude Include="..\..\twix\ICPanelControl.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\IFloatNumberPanel.h">
+    <ClInclude Include="..\..\twix\IFloatNumberPanel.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\IKnobText.h">
+    <ClInclude Include="..\..\twix\IKnobText.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\IRenderHelper.h">
+    <ClInclude Include="..\..\twix\IRenderHelper.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\MidiNode.h">
+    <ClInclude Include="..\..\twix\MidiNode.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\on.defs.h">
+    <ClInclude Include="..\..\twix\on.defs.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\SortedInt.h">
+    <ClInclude Include="..\..\twix\SortedInt.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\TimingInterval.h">
+    <ClInclude Include="..\..\twix\TimingInterval.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\on.tfwio.h">
+    <ClInclude Include="..\..\twix\on.tfwio.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\twix\include\on.smf.h">
+    <ClInclude Include="..\..\twix\on.smf.h">
       <Filter>twix-inc</Filter>
     </ClInclude>
     <ClInclude Include="Arpeggio.h">
@@ -154,7 +154,7 @@
     <ClCompile Include="Arpeggio.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\twix\source\ICControls.cpp">
+    <ClCompile Include="..\..\twix\ICControls.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
   </ItemGroup>

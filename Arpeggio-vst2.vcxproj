@@ -245,28 +245,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\twix\include\Delegate.h" />
-    <ClInclude Include="..\..\twix\include\GallantSignal.h" />
-    <ClInclude Include="..\..\twix\include\IADSR.h" />
-    <ClInclude Include="..\..\twix\include\IBitmapButton-shoddy.h" />
-    <ClInclude Include="..\..\twix\include\IBitmapButton.h" />
-    <ClInclude Include="..\..\twix\include\ICControl.h" />
-    <ClInclude Include="..\..\twix\include\ICControls.h" />
-    <ClInclude Include="..\..\twix\include\IChannelStateManager.h" />
-    <ClInclude Include="..\..\twix\include\IColDetail.h" />
-    <ClInclude Include="..\..\twix\include\IColNumber.h" />
-    <ClInclude Include="..\..\twix\include\ICPanelControl.h" />
-    <ClInclude Include="..\..\twix\include\IFloatBuffer.h" />
-    <ClInclude Include="..\..\twix\include\IFloatNumberPanel.h" />
-    <ClInclude Include="..\..\twix\include\IKnobText.h" />
-    <ClInclude Include="..\..\twix\include\IOscEnvelope.h" />
-    <ClInclude Include="..\..\twix\include\IRenderHelper.h" />
-    <ClInclude Include="..\..\twix\include\MidiNode.h" />
-    <ClInclude Include="..\..\twix\include\on.defs.h" />
-    <ClInclude Include="..\..\twix\include\on.tfwio.h" />
-    <ClInclude Include="..\..\twix\include\snd.h" />
-    <ClInclude Include="..\..\twix\include\SortedInt.h" />
-    <ClInclude Include="..\..\twix\include\TimingInterval.h" />
+    <ClInclude Include="..\..\twix\Delegate.h" />
+    <ClInclude Include="..\..\twix\GallantSignal.h" />
+    <ClInclude Include="..\..\twix\IADSR.h" />
+    <ClInclude Include="..\..\twix\IBitmapButton-shoddy.h" />
+    <ClInclude Include="..\..\twix\IBitmapButton.h" />
+    <ClInclude Include="..\..\twix\ICControl.h" />
+    <ClInclude Include="..\..\twix\ICControls.h" />
+    <ClInclude Include="..\..\twix\IChannelStateManager.h" />
+    <ClInclude Include="..\..\twix\IColDetail.h" />
+    <ClInclude Include="..\..\twix\IColNumber.h" />
+    <ClInclude Include="..\..\twix\ICPanelControl.h" />
+    <ClInclude Include="..\..\twix\IFloatBuffer.h" />
+    <ClInclude Include="..\..\twix\IFloatNumberPanel.h" />
+    <ClInclude Include="..\..\twix\IKnobText.h" />
+    <ClInclude Include="..\..\twix\IOscEnvelope.h" />
+    <ClInclude Include="..\..\twix\IRenderHelper.h" />
+    <ClInclude Include="..\..\twix\MidiNode.h" />
+    <ClInclude Include="..\..\twix\on.defs.h" />
+    <ClInclude Include="..\..\twix\on.tfwio.h" />
+    <ClInclude Include="..\..\twix\snd.h" />
+    <ClInclude Include="..\..\twix\SortedInt.h" />
+    <ClInclude Include="..\..\twix\TimingInterval.h" />
     <ClInclude Include="..\..\WDL\IPlug\IPlugVST.h" />
     <ClInclude Include="Arpeggio.h" />
     <ClInclude Include="IKeyboardControl-Mod.h" />
@@ -275,7 +275,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\twix\source\ICControls.cpp" />
+    <ClCompile Include="..\..\twix\ICControls.cpp" />
     <ClCompile Include="..\..\WDL\IPlug\IPlugVST.cpp" />
     <ClCompile Include="Arpeggio.cpp" />
   </ItemGroup>
